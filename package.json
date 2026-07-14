@@ -1,0 +1,30 @@
+{
+  "name": "algerian-darja-course-generator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "plan": "tsx src/cli.ts plan",
+    "generate": "tsx src/cli.ts generate",
+    "resume": "tsx src/cli.ts run",
+    "status": "tsx src/cli.ts status",
+    "assemble": "tsx src/cli.ts assemble",
+    "retry": "tsx src/cli.ts retry",
+    "test": "tsx --test test/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "dotenv": "^17.0.0",
+    "openai": "^6.17.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@10.0.0"
+}
