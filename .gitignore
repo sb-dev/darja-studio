@@ -2,6 +2,7 @@ node_modules/
 .env
 state/plan.json
 state/run-state.json
+state/usage-ledger.jsonl
 state/summaries/
 output/*.md
 !output/.gitkeep
