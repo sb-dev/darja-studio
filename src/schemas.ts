@@ -46,9 +46,14 @@ export const TaskRuntimeSchema = z.object({
 });
 
 export const RunStateSchema = z.object({
+  runId: z.string().uuid(),
   createdAt: z.string(),
   updatedAt: z.string(),
   tasks: z.record(z.string(), TaskRuntimeSchema)
+});
+
+export const LegacyCompatibleRunStateSchema = RunStateSchema.extend({
+  runId: z.string().uuid().optional()
 });
 
 export type CoursePlan = z.infer<typeof CoursePlanSchema>;

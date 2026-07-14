@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { zodTextFormat } from "openai/helpers/zod";
 import { config } from "./config.js";
 import { validatePlanGraph } from "./graph.js";
@@ -13,6 +14,7 @@ import {
   readText,
   writeJsonAtomic
 } from "./store.js";
+import { trackOpenAIResponse } from "./usage.js";
 
 export async function createPlan(force = false): Promise<void> {
   await ensureProjectDirectories();
@@ -24,16 +26,22 @@ export async function createPlan(force = false): Promise<void> {
   }
 
   const specification = await readText(config.specPath);
+  const runId = randomUUID();
 
-  const response = await getOpenAI().responses.parse({
-    model: config.model,
-    instructions: PLANNER_INSTRUCTIONS,
-    input: plannerInput(specification),
-    max_output_tokens: config.maxOutputTokens,
-    text: {
-      format: zodTextFormat(CoursePlanSchema, "course_generation_plan")
-    }
-  });
+  const response = await trackOpenAIResponse(
+    runId,
+    { operation: "planner" },
+    () =>
+      getOpenAI().responses.parse({
+        model: config.model,
+        instructions: PLANNER_INSTRUCTIONS,
+        input: plannerInput(specification),
+        max_output_tokens: config.maxOutputTokens,
+        text: {
+          format: zodTextFormat(CoursePlanSchema, "course_generation_plan")
+        }
+      })
+  );
 
   const plan = response.output_parsed;
   if (!plan) {
@@ -44,6 +52,7 @@ export async function createPlan(force = false): Promise<void> {
 
   const now = new Date().toISOString();
   const runState: RunState = {
+    runId,
     createdAt: now,
     updatedAt: now,
     tasks: Object.fromEntries(

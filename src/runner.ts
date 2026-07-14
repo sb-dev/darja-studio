@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { zodTextFormat } from "openai/helpers/zod";
 import { config } from "./config.js";
 import { validatePlanGraph } from "./graph.js";
@@ -10,6 +11,7 @@ import {
 } from "./prompts.js";
 import {
   CoursePlanSchema,
+  LegacyCompatibleRunStateSchema,
   RunStateSchema,
   TaskResultSchema,
   type CoursePlan,
@@ -25,6 +27,7 @@ import {
   writeJsonAtomic,
   writeText
 } from "./store.js";
+import { readUsageLedger, summarizeUsage, trackOpenAIResponse } from "./usage.js";
 
 function now(): string {
   return new Date().toISOString();
@@ -42,10 +45,15 @@ async function loadProject(): Promise<{
   plan: CoursePlan;
   state: RunState;
 }> {
-  const [plan, state] = await Promise.all([
+  const [plan, storedState] = await Promise.all([
     readJson(config.planPath, CoursePlanSchema),
-    readJson(config.runStatePath, RunStateSchema)
+    readJson(config.runStatePath, LegacyCompatibleRunStateSchema)
   ]);
+  const needsRunId = !storedState.runId;
+  const state = RunStateSchema.parse({
+    ...storedState,
+    runId: storedState.runId ?? randomUUID()
+  });
 
   validatePlanGraph(plan);
 
@@ -62,6 +70,7 @@ async function loadProject(): Promise<{
     }
   }
 
+  if (needsRunId) await saveState(state);
   return { plan, state };
 }
 
@@ -139,16 +148,21 @@ async function dependencyMaterial(
 
 async function generateTask(
   plan: CoursePlan,
-  task: TaskDefinition
+  task: TaskDefinition,
+  runId: string,
+  attempt: number
 ): Promise<void> {
   if (task.kind === "section-editor") {
-    await generateSectionTask(plan, task);
+    await generateSectionTask(plan, task, runId, attempt);
     return;
   }
 
   const dependencies = await dependencyMaterial(plan, task);
 
-  const response = await getOpenAI().responses.parse({
+  const response = await trackOpenAIResponse(
+    runId,
+    { operation: "task", taskId: task.id, attempt },
+    () => getOpenAI().responses.parse({
     model: config.model,
     instructions: TASK_INSTRUCTIONS,
     input: taskInput(plan, task, dependencies),
@@ -159,7 +173,8 @@ async function generateTask(
     text: {
       format: zodTextFormat(TaskResultSchema, "course_task_result")
     }
-  });
+  })
+  );
 
   const result = response.output_parsed;
   if (!result) {
@@ -174,7 +189,9 @@ async function generateTask(
 
 async function generateSectionTask(
   plan: CoursePlan,
-  task: TaskDefinition
+  task: TaskDefinition,
+  runId: string,
+  attempt: number
 ): Promise<void> {
   const byId = new Map(plan.tasks.map((candidate) => [candidate.id, candidate]));
   const drafts = task.dependsOn.map((dependencyId) => {
@@ -210,7 +227,17 @@ async function generateSectionTask(
 
   for (const [index, draft] of drafts.entries()) {
     const draftContent = await readText(outputPath(draft.outputFile));
-    const response = await getOpenAI().responses.parse({
+    const response = await trackOpenAIResponse(
+      runId,
+      {
+        operation: "section_chunk",
+        taskId: task.id,
+        attempt,
+        draftId: draft.id,
+        chunkIndex: index,
+        chunkCount: drafts.length
+      },
+      () => getOpenAI().responses.parse({
       model: config.model,
       instructions: SECTION_CHUNK_INSTRUCTIONS,
       input: sectionChunkInput(
@@ -229,7 +256,8 @@ async function generateSectionTask(
       text: {
         format: zodTextFormat(TaskResultSchema, "course_section_chunk")
       }
-    });
+    })
+    );
 
     const result = response.output_parsed;
     if (!result) {
@@ -267,7 +295,7 @@ async function executeTask(
     );
 
     try {
-      await generateTask(plan, task);
+      await generateTask(plan, task, state.runId, runtime.attempts);
       runtime.status = "done";
       runtime.completedAt = now();
       runtime.error = undefined;
@@ -383,6 +411,7 @@ export async function assembleCourse(): Promise<void> {
 
 export async function showStatus(): Promise<void> {
   const { plan, state } = await loadProject();
+  const usage = summarizeUsage(await readUsageLedger(), state.runId);
   const counts = {
     pending: 0,
     running: 0,
@@ -400,6 +429,16 @@ export async function showStatus(): Promise<void> {
   console.log(`Running: ${counts.running}`);
   console.log(`Done: ${counts.done}`);
   console.log(`Failed: ${counts.failed}`);
+  console.log(`API responses: ${usage.responses}`);
+  console.log(`Web searches: ${usage.webSearches}`);
+  console.log(
+    `Input tokens: ${usage.input} (${usage.cachedInput} cached, ${usage.cacheWrite} cache write)`
+  );
+  console.log(`Output tokens: ${usage.output} (${usage.reasoning} reasoning)`);
+  console.log(`Estimated cost: $${usage.costUsd.toFixed(6)}`);
+  if (usage.unknownCostEvents > 0) {
+    console.log(`Unknown-cost events: ${usage.unknownCostEvents}`);
+  }
 
   for (const task of plan.tasks) {
     const runtime = state.tasks[task.id];

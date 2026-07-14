@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, mkdir, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
@@ -8,6 +8,11 @@ import test from "node:test";
 import { validatePlanGraph } from "../src/graph.js";
 import { parsePositiveInteger } from "../src/integer.js";
 import { sectionChunkInput } from "../src/prompts.js";
+import {
+  UsageLedgerEntrySchema,
+  calculateModelCost,
+  summarizeUsage
+} from "../src/usage.js";
 import type {
   CoursePlan,
   RunState,
@@ -48,7 +53,7 @@ function plan(tasks: TaskDefinition[]): CoursePlan {
 
 async function projectFixture(
   coursePlan: CoursePlan,
-  state: RunState
+  state: RunState | Omit<RunState, "runId">
 ): Promise<string> {
   const directory = await mkdtemp(path.join(os.tmpdir(), "darja-runner-"));
   await mkdir(path.join(directory, "state"), { recursive: true });
@@ -132,6 +137,7 @@ test("persisted plans are graph-validated by CLI commands", async () => {
   });
   const second = task("second", { dependsOn: ["first"] });
   const state: RunState = {
+    runId: "00000000-0000-4000-8000-000000000001",
     createdAt: new Date(0).toISOString(),
     updatedAt: new Date(0).toISOString(),
     tasks: {
@@ -151,6 +157,7 @@ test("persisted plans are graph-validated by CLI commands", async () => {
 test("assembly refuses unfinished final artifacts", async () => {
   const finalTask = task("final", { includeInCourse: true });
   const state: RunState = {
+    runId: "00000000-0000-4000-8000-000000000001",
     createdAt: new Date(0).toISOString(),
     updatedAt: new Date(0).toISOString(),
     tasks: {
@@ -164,4 +171,202 @@ test("assembly refuses unfinished final artifacts", async () => {
   });
   assert.equal(result.status, 1);
   assert.match(result.stderr, /Cannot assemble an incomplete course/);
+});
+
+
+test("GPT-5.6 pricing separates cached and cache-write tokens", () => {
+  const calculated = calculateModelCost("gpt-5.6", "gpt-5.6-sol", {
+    input_tokens: 1_000,
+    input_tokens_details: {
+      cached_tokens: 200,
+      cache_write_tokens: 100
+    },
+    output_tokens: 100,
+    output_tokens_details: { reasoning_tokens: 40 },
+    total_tokens: 1_100
+  });
+
+  assert.equal(calculated.rates?.longContext, false);
+  assert.equal(calculated.rates?.cacheWritePerMillion, 6.25);
+  assert.equal(calculated.costUsd, 0.007225);
+  assert.deepEqual(calculated.tokens, {
+    input: 1_000,
+    cachedInput: 200,
+    cacheWrite: 100,
+    output: 100,
+    reasoning: 40,
+    total: 1_100
+  });
+});
+
+test("GPT-5.6 long-context pricing begins above 272,000 input tokens", () => {
+  const boundary = calculateModelCost("gpt-5.6", null, {
+    input_tokens: 272_000,
+    output_tokens: 0,
+    total_tokens: 272_000
+  });
+  const long = calculateModelCost("gpt-5.6-sol", null, {
+    input_tokens: 272_001,
+    output_tokens: 0,
+    total_tokens: 272_001
+  });
+
+  assert.equal(boundary.rates?.longContext, false);
+  assert.equal(boundary.rates?.inputPerMillion, 5);
+  assert.equal(long.rates?.longContext, true);
+  assert.equal(long.rates?.inputPerMillion, 10);
+  assert.equal(long.rates?.cachedInputPerMillion, 1);
+  assert.equal(long.rates?.cacheWritePerMillion, 12.5);
+  assert.equal(long.rates?.outputPerMillion, 45);
+});
+
+test("unknown models track tokens without inventing a cost", () => {
+  const calculated = calculateModelCost("custom-model", null, {
+    input_tokens: 10,
+    output_tokens: 5,
+    total_tokens: 15
+  });
+
+  assert.equal(calculated.tokens.total, 15);
+  assert.equal(calculated.rates, null);
+  assert.equal(calculated.costUsd, null);
+});
+
+test("usage summaries filter by run and include tool-call costs", () => {
+  const runId = "00000000-0000-4000-8000-000000000001";
+  const otherRunId = "00000000-0000-4000-8000-000000000002";
+  const common = {
+    schemaVersion: 1 as const,
+    timestamp: new Date(0).toISOString(),
+    context: { operation: "task" as const, taskId: "chapter", attempt: 1 }
+  };
+  const entries = [
+    UsageLedgerEntrySchema.parse({
+      ...common,
+      eventId: "00000000-0000-4000-8000-000000000011",
+      runId,
+      type: "model_response",
+      responseId: "resp_1",
+      requestedModel: "gpt-5.6",
+      returnedModel: "gpt-5.6-sol",
+      status: "completed",
+      tokens: {
+        input: 100,
+        cachedInput: 20,
+        cacheWrite: 10,
+        output: 50,
+        reasoning: 5,
+        total: 150
+      },
+      rates: {
+        catalogVersion: "test",
+        longContext: false,
+        inputPerMillion: 5,
+        cachedInputPerMillion: 0.5,
+        cacheWritePerMillion: 6.25,
+        outputPerMillion: 30
+      },
+      costUsd: 0.002
+    }),
+    UsageLedgerEntrySchema.parse({
+      ...common,
+      eventId: "00000000-0000-4000-8000-000000000012",
+      runId,
+      type: "web_search",
+      responseId: "resp_1",
+      toolCallId: "search_1",
+      action: "search",
+      status: "completed",
+      catalogVersion: "test",
+      costPerCallUsd: 0.01,
+      costUsd: 0.01
+    }),
+    UsageLedgerEntrySchema.parse({
+      ...common,
+      eventId: "00000000-0000-4000-8000-000000000013",
+      runId,
+      type: "model_response",
+      responseId: null,
+      requestedModel: "custom-model",
+      returnedModel: null,
+      status: "failed",
+      tokens: null,
+      rates: null,
+      costUsd: null,
+      error: "failed"
+    }),
+    UsageLedgerEntrySchema.parse({
+      ...common,
+      eventId: "00000000-0000-4000-8000-000000000014",
+      runId: otherRunId,
+      type: "web_search",
+      responseId: "resp_2",
+      toolCallId: "search_2",
+      action: "search",
+      status: "completed",
+      catalogVersion: "test",
+      costPerCallUsd: 0.01,
+      costUsd: 0.01
+    })
+  ];
+
+  assert.deepEqual(summarizeUsage(entries, runId), {
+    responses: 2,
+    webSearches: 1,
+    input: 100,
+    cachedInput: 20,
+    cacheWrite: 10,
+    output: 50,
+    reasoning: 5,
+    costUsd: 0.012,
+    unknownCostEvents: 1
+  });
+});
+
+test("status backfills legacy run state with a run ID", async () => {
+  const finalTask = task("legacy", { includeInCourse: true });
+  const legacyState: Omit<RunState, "runId"> = {
+    createdAt: new Date(0).toISOString(),
+    updatedAt: new Date(0).toISOString(),
+    tasks: {
+      legacy: { status: "pending", attempts: 0 }
+    }
+  };
+  const cwd = await projectFixture(plan([finalTask]), legacyState);
+  const result = spawnSync(tsx, [cli, "status"], {
+    cwd,
+    encoding: "utf8"
+  });
+
+  assert.equal(result.status, 0);
+  assert.match(result.stdout, /API responses: 0/);
+  const persisted = JSON.parse(
+    await readFile(path.join(cwd, "state/run-state.json"), "utf8")
+  ) as { runId?: string };
+  assert.match(persisted.runId ?? "", /^[0-9a-f-]{36}$/);
+});
+
+
+test("status reports malformed ledger lines", async () => {
+  const finalTask = task("malformed", { includeInCourse: true });
+  const state: RunState = {
+    runId: "00000000-0000-4000-8000-000000000001",
+    createdAt: new Date(0).toISOString(),
+    updatedAt: new Date(0).toISOString(),
+    tasks: {
+      malformed: { status: "pending", attempts: 0 }
+    }
+  };
+  const cwd = await projectFixture(plan([finalTask]), state);
+  await writeFile(
+    path.join(cwd, "state/usage-ledger.jsonl"),
+    "{not valid json}\n"
+  );
+  const result = spawnSync(tsx, [cli, "status"], {
+    cwd,
+    encoding: "utf8"
+  });
+
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /Invalid usage ledger entry on line 1/);
 });

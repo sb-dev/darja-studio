@@ -49,7 +49,8 @@ pnpm typecheck
 ```text
 spec/course.md          Course requirements and outline
 state/plan.json         Generated task graph
-state/run-state.json    Task status, attempts and errors
+state/run-state.json    Task status, attempts, errors and run ID
+state/usage-ledger.jsonl Append-only token and estimated-cost events
 state/summaries/        Compact summaries used by later tasks
 output/drafts/          Chapter drafts
 output/sections/        Edited final sections
@@ -77,6 +78,12 @@ Web research does not replace native review. The generated course should still b
 ## Audio scope
 
 This version generates **TTS-ready scripts and recording manifests**, not audio files. That keeps the text-generation workflow simple and allows a separate audio pipeline to select an appropriate Algerian model or human speaker later.
+
+## Usage and cost tracking
+
+Every logical Responses API request and each hosted web-search call is appended to `state/usage-ledger.jsonl`. Entries include the current run ID, task context, token breakdown, the versioned GPT-5.6 rates used, and estimated USD cost; prompts and generated content are not stored. `pnpm status` reports totals for the current plan run. Costs are estimates and may differ from the authoritative OpenAI invoice. Unknown models retain token counts but have no estimated cost.
+
+The ledger is intentionally preserved by forced re-planning so historical rows remain available.
 
 ## Restarting completely
 
