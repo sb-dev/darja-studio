@@ -1,0 +1,1173 @@
+{
+  "courseTitle": "Speak Algerian Arabic: Quick, Natural and Rooted",
+  "courseBrief": "Create a cumulative self-study course for English-speaking adult beginners, progressing toward independent conversation in Algerian Darja. Use a broadly useful central urban baseline associated mainly with Algiers without presenting it as the sole or universally preferred Algerian variety. Productive forms must be credible and consistent; important western, eastern, Saharan and Amazigh-influenced differences should appear as bounded recognition notes using cautious language such as “you may hear.” Distinguish ordinary Darja, Modern Standard Arabic, integrated French-derived vocabulary, active French code-switching, Amazigh-origin or influenced forms, and regional or generational usage.\n\nTeach approximately 380 productive and 150 recognition items through a compact, structurally connected sentence engine rather than disconnected lists. A typical chapter adds 10–16 productive items selected for conversational utility, combinability, recurrence, pronunciation value, cultural value and manageable learning cost. Mark productive versus recognition vocabulary. Recycle productive language within its chapter, elsewhere in its section, in review or listening work and in the section exit task. Introduce past and future early enough for genuine conversation, and prioritise clarification, repair, connected speech and realistic code-switching.\n\nEvery chapter needs a communicative outcome and realistic situation; productive and recognition vocabulary; reusable sentence frames; accessible and ordinary-speed dialogues; Arabic script, consistent pedagogical transliteration and natural English; pronunciation or rhythm work; pragmatic guidance; bounded regional recognition; relevant cultural or historical material; substitution and retrieval practice; listening work; an information-gap or personalised speaking task; TTS-ready scripts and recording notes; sources and native-review questions. Dialogues must accomplish believable purposes rather than merely display vocabulary. Script learning must support speaking and must not delay it. Keep pedagogical transliteration distinct from informal Arabizi.\n\nBase linguistic, regional, cultural, culinary, musical and historical claims on credible sources. Prefer corpora and documented recordings, peer-reviewed work, Algerian scholars and universities, institutional cultural sources, specialist dictionaries and teaching materials, followed by native-speaker elicitation. Informal examples establish occurrence only. Search in English, French and Arabic and, where useful, test Arabic spellings, spelling variants and Arabizi. Cite researched claims inline and provide source lists. Flag productive language that still requires native-speaker validation. Never invent proverbs, etymologies, quotations, lyrics or causal historical claims, and do not reproduce copyrighted lyrics.\n\nUse colonial history only when a documented mechanism connects it to language hierarchy, education, oral transmission, names and places, solidarity, food continuity, music, humour, resistance, migration, women’s work or multilingual appropriation. Separate documented events, personal memories, collective narratives and editorial interpretation. Seek Algerian and independent scholarly or primary evidence for sensitive claims. Represent ordinary life, pleasure, creativity and contemporary ambition alongside suffering and resistance; avoid stereotypes, romanticisation and treating one family account as the national story.\n\nThe project produces audio scripts and manifests, not final audio. Important utterances should support a careful phrase, natural phrase, shadowing groups and a dialogue response or contrast. TTS may prototype vocabulary, substitution and slow review. Prefer native recording for anchor dialogues, regional comparison, code-switching, humour, hospitality, music-influenced speech and sensitive history. Every audio item must specify clip ID, Arabic text, transliteration, meaning, proposed speaker region/profile, relationship and setting, pace, emotional intent, pauses, code-switching, pronunciation risks, TTS acceptability and whether human recording is required. Never direct generic TTS to fabricate an unsupported regional accent.\n\nEditors must control vocabulary growth, preserve cumulative progression, reconcile terminology and transliteration, retain evidence limits and produce practical, readable sections rather than linguistic monographs. The finished course contains all nine sections and forty-nine chapters plus a concise introduction and usable appendices.",
+  "tasks": [
+    {
+      "id": "foundation",
+      "order": 0,
+      "title": "Course foundation: method, dialect, notation, evidence and audio",
+      "kind": "foundation",
+      "instructions": "Establish the executable course-wide production standard. Define the compact sentence-engine teaching method; central urban/Algiers baseline and bounded regional policy; distinctions among Darja, MSA, French-derived words, active French code-switching, Amazigh influence and regional/generational forms; Arabic-script conventions; one consistent pedagogical transliteration system; Arabizi treatment; pronunciation notation; productive/recognition labels; approximate 380/150 vocabulary budget and section allocations; recurrence rules; cumulative grammar sequence; native-validation flags; the complete chapter and section templates; exercise and section-exit design; inline citation and source-quality policy; handling of uncertainty and sensitive colonial history; and TTS/recording conventions. Specify an audio manifest schema containing every field required by the brief and stable clip-ID conventions. Include a proposed cross-course lexical ledger structure so independently drafted chapters can avoid obvious duplication. Research and cite linguistic choices; identify decisions requiring native review. Do not draft course chapters.",
+      "dependsOn": [],
+      "dependencyInput": "full",
+      "outputFile": "output/00-foundation/course-standard.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic Algiers dialect phonology grammar corpus pedagogical transliteration",
+        "arabe algérien parler d’Alger phonétique corpus transcription variation régionale",
+        "اللهجة الجزائرية لهجة العاصمة الأصوات التفريغ المدونات الاختلافات الجهوية"
+      ]
+    },
+    {
+      "id": "introduction",
+      "order": 1,
+      "title": "Introduction — How to use Speak Algerian Arabic",
+      "kind": "introduction",
+      "instructions": "Using the foundation, write the concise learner-facing introduction. Explain the sentence-engine method, productive versus recognition vocabulary, central baseline and regional limits, Arabic script and transliteration, careful versus natural audio, shadowing, retrieval practice, code-switching labels, native-review flags and respectful use of cultural and historical material. Give a practical study routine for book, web and audio use without teaching a full chapter or making unsupported factual claims. Include citations only for factual claims that need them.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "summary",
+      "outputFile": "output/01-introduction.md",
+      "includeInCourse": true,
+      "webSearch": false,
+      "researchQueries": []
+    },
+    {
+      "id": "ch01",
+      "order": 101,
+      "title": "Chapter 1 draft — What Algerian Arabic sounds like",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 1 on Algerian rhythm, reduced vowels, connected words, essential consonants, careful versus rapid speech, Arabic script, pedagogical transliteration, Arabizi and a bounded regional pronunciation preview. Frame Darja as an oral, adaptive language rather than deficient MSA. Follow the foundation. Include a communicative outcome and realistic situation; 10–16 productive items where appropriate plus clearly separated recognition vocabulary; reusable sentence frames; purposeful accessible and ordinary-speech dialogues; every taught utterance in Arabic script, consistent transliteration and natural English; pronunciation/rhythm instruction; pragmatic guidance; bounded regional notes; relevant cultural/history material only; substitution, retrieval, listening and personalised or information-gap tasks; deliberate recycling; TTS-ready scripts and a full recording manifest; inline citations and source list for research; and precise native-review questions and validation flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch01-sounds.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic phonology connected speech reduced vowels Algiers dialect",
+        "phonétique arabe algérien parler d’Alger voyelles réduites enchaînement",
+        "أصوات اللهجة الجزائرية لهجة العاصمة اختزال الحركات الكلام المتصل"
+      ]
+    },
+    {
+      "id": "ch02",
+      "order": 102,
+      "title": "Chapter 2 draft — Greeting people naturally",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 2 on natural greetings, wellbeing, welcome, leave-taking, formality, warmth, repetition, individual/group address, older people and entering a home. Follow the foundation. Include a communicative outcome and realistic situation; 10–16 productive items plus clearly separated recognition vocabulary; reusable sentence frames; purposeful accessible and ordinary-speech dialogues; Arabic script, consistent transliteration and natural English for every taught utterance; pronunciation/rhythm; pragmatic and social guidance; bounded regional notes; cultural/history only where relevant; substitution, retrieval, listening and personalised or information-gap tasks; recycling; TTS-ready scripts and complete recording metadata; citations and sources for research; and native-review questions and validation flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch02-greetings.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic greetings hospitality address terms older people",
+        "salutations arabe algérien accueil politesse entrer chez quelqu’un",
+        "التحيات في اللهجة الجزائرية آداب الضيافة ومخاطبة الكبار"
+      ]
+    },
+    {
+      "id": "ch03",
+      "order": 103,
+      "title": "Chapter 3 draft — Who I am and where I come from",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 3 on pronouns, names, origin, residence, regional identity, nationality and languages spoken or understood, with a carefully sourced strand on names, place names and identity under colonial administration. Follow the foundation. Include the required communicative outcome, realistic situation, 10–16 productive and separate recognition items, reusable frames, two purposeful dialogue levels, Arabic/transliteration/natural English, pronunciation, pragmatics, bounded regional notes, relevant history, substitution and retrieval, listening and personalised speaking, recycling, TTS-ready scripts and full recording metadata, inline citations and sources, and native-review questions/flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch03-identity.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic self introduction origin residence nationality language phrases",
+        "noms de lieux identité administration coloniale Algérie état civil",
+        "أسماء الأشخاص والأماكن والهوية والإدارة الاستعمارية في الجزائر"
+      ]
+    },
+    {
+      "id": "ch04",
+      "order": 104,
+      "title": "Chapter 4 draft — Understanding and repairing conversation",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 4 on understanding, non-understanding, repetition, slower speech, asking meaning or wording and politely correcting misunderstanding; connect translation and code-switching to practical intelligence without overclaiming. Follow the foundation and include the complete required chapter package: outcome, situation, 10–16 productive and separate recognition items, reusable frames, two purposeful dialogue levels, Arabic/transliteration/English, pronunciation, pragmatics, bounded variation, relevant culture, substitution, retrieval, listening, personalised or information-gap speaking, recycling, TTS scripts and full recording manifest, citations/source list, and native-review questions/flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch04-repair.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic conversation repair clarification repetition phrases code switching",
+        "arabe algérien stratégies de réparation conversationnelle reformulation alternance codique",
+        "استراتيجيات إصلاح المحادثة وطلب التوضيح في اللهجة الجزائرية"
+      ]
+    },
+    {
+      "id": "sec01",
+      "order": 2,
+      "title": "Section 1 — Hearing and entering the language",
+      "kind": "section-editor",
+      "instructions": "Read all four complete chapter drafts and return the complete polished Section 1, not editorial comments. Preserve all chapter components while reconciling transliteration, script, terminology, register, citations and audio IDs. Harmonise the productive/recognition ledger, remove uncontrolled duplication, ensure new language recurs within the section, strengthen progression from sound to greeting, identity and repair, and add a concise section opener, cumulative review/listening work and an exit task. Keep regional claims bounded, flag native review and ensure manifests contain every required field.",
+      "dependsOn": [
+        "ch01",
+        "ch02",
+        "ch03",
+        "ch04"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/sections/02-section-01-hearing-entering.md",
+      "includeInCourse": true,
+      "webSearch": false,
+      "researchQueries": []
+    },
+    {
+      "id": "ch05",
+      "order": 105,
+      "title": "Chapter 5 draft — Having, wanting and needing",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 5 on have, want, need, like, can/cannot, enough, still and already. Follow the foundation. Provide the complete standard chapter: communicative outcome, realistic situation, 10–16 productive items and separate recognition vocabulary, reusable frames, purposeful accessible and ordinary dialogues, Arabic/transliteration/natural English, pronunciation, pragmatics, bounded regional notes, relevant culture only, substitution, retrieval, listening and personalised/information-gap practice, recycling, TTS-ready scripts and complete recording metadata, researched citations/sources, and native-review flags/questions.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch05-have-want-need.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic have want need can still already constructions",
+        "arabe algérien avoir vouloir devoir pouvoir encore déjà",
+        "اللهجة الجزائرية عندي نحب نحتاج نقدر ما نقدرش مازال خلاص"
+      ]
+    },
+    {
+      "id": "ch06",
+      "order": 106,
+      "title": "Chapter 6 draft — This, that, here and there",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 6 on demonstratives, location, who/what/which/where, existence, something and nothing. Follow the foundation and provide every standard component: outcome, situation, 10–16 productive plus recognition items, reusable frames, two purposeful dialogue levels, Arabic/transliteration/English, pronunciation, pragmatics, bounded variants, relevant culture, substitution/retrieval/listening/personalised speaking, recycling, TTS scripts and full manifest, citations/sources and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch06-demonstratives-location.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic demonstratives existential locatives something nothing",
+        "démonstratifs présentatifs localisation arabe algérien kayen makach",
+        "أسماء الإشارة والمكان والوجود في اللهجة الجزائرية كاين ماكانش"
+      ]
+    },
+    {
+      "id": "ch07",
+      "order": 107,
+      "title": "Chapter 7 draft — Asking useful questions",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 7 on who, what, where, why, how, when, how much, really and then, explicitly teaching question intonation. Follow the foundation and include the full standard chapter package: outcome, situation, productive/recognition vocabulary, reusable frames, two realistic dialogues, triple rendering, pronunciation, pragmatics, bounded regional notes, relevant culture, substitution, retrieval, listening and speaking tasks, recycling, TTS scripts/metadata, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch07-questions.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic question words interrogative intonation Algiers",
+        "mots interrogatifs intonation questions arabe algérien",
+        "أدوات الاستفهام والتنغيم في اللهجة الجزائرية"
+      ]
+    },
+    {
+      "id": "ch08",
+      "order": 108,
+      "title": "Chapter 8 draft — Negation without grammar tables",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 8 on ma…sh, frequent negative phrases, never, not yet, no longer and softened refusal, teaching patterns through use rather than grammar tables. Follow the foundation. Include the full chapter structure: outcome and situation; 10–16 productive plus recognition items; reusable frames; accessible and ordinary purposeful dialogues; Arabic/transliteration/English; pronunciation; social pragmatics; bounded variants; relevant cultural notes; substitution, retrieval, listening and personalised speaking; recycling; TTS scripts and full manifest; citations/sources; native-review flags/questions.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch08-negation.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic negation ma sh never not yet no longer refusal",
+        "négation arabe algérien ma ch jamais pas encore refus atténué",
+        "النفي في اللهجة الجزائرية ما ش مازال ما بقاش الرفض المؤدب"
+      ]
+    },
+    {
+      "id": "ch09",
+      "order": 109,
+      "title": "Chapter 9 draft — Joining thoughts",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 9 on and, but, because, so, also, maybe, if, then, before, after, normally and giving examples. Follow the foundation. Supply all standard components, including outcome, realistic situation, productive/recognition split, reusable frames, purposeful two-level dialogues, Arabic/transliteration/English, rhythm, pragmatics, bounded variation, relevant culture, substitution/retrieval/listening/speaking, recycling, TTS scripts and full metadata, citations and native-review flags. Prepare language that supports the section exit performance.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch09-connectors.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic discourse connectors because so maybe if before after",
+        "connecteurs discursifs arabe algérien parce que donc peut-être si",
+        "روابط الكلام في اللهجة الجزائرية لأن لذلك ربما إذا قبل بعد"
+      ]
+    },
+    {
+      "id": "sec02",
+      "order": 3,
+      "title": "Section 2 — The words that generate conversation",
+      "kind": "section-editor",
+      "instructions": "Return the complete revised Section 2 from Chapters 5–9, not comments. Reconcile all forms, vocabulary labels, transliteration, citations and audio IDs; control lexical growth and ensure recurrence across chapters. Add a section opener, cumulative retrieval/listening review and the specified exit task in which the learner introduces themself, asks questions, explains a simple problem and repairs misunderstanding. Preserve complete chapter content, bounded variation, source lists, native-review flags and full audio metadata.",
+      "dependsOn": [
+        "ch05",
+        "ch06",
+        "ch07",
+        "ch08",
+        "ch09"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/sections/03-section-02-conversation-engine.md",
+      "includeInCourse": true,
+      "webSearch": false,
+      "researchQueries": []
+    },
+    {
+      "id": "ch10",
+      "order": 110,
+      "title": "Chapter 10 draft — Family and belonging",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 10 on family, possession, age relationships, marriage and respectful enquiry, with an evidence-bounded strand on extended-family care and continuity during displacement, conflict and migration. Follow the foundation and include every standard chapter component: outcome, realistic situation, 10–16 productive plus recognition items, frames, two purposeful dialogues, Arabic/transliteration/English, pronunciation, pragmatics, regional notes, relevant history, substitution/retrieval/listening/personalised speaking, recycling, TTS scripts/full metadata, citations/sources and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch10-family.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic family kinship possession respectful marriage questions",
+        "parenté famille solidarité migration Algérie anthropologie",
+        "القرابة والأسرة والتضامن والهجرة في الجزائر"
+      ]
+    },
+    {
+      "id": "ch11",
+      "order": 111,
+      "title": "Chapter 11 draft — At home",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 11 on rooms, household objects, enter, sit, wait, bring, open, close, put, take, clean, ready, hot, cold and location. Apply the foundation and deliver the complete standard chapter with outcome, situation, controlled productive/recognition vocabulary, frames, purposeful dialogues, triple rendering, pronunciation, pragmatics, bounded variation, only relevant culture, varied practice and retrieval, recycling, TTS scripts/full manifest, citations and native-review questions.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch11-home.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic home rooms household commands verbs",
+        "vocabulaire maison verbes domestiques arabe algérien",
+        "مفردات البيت والأفعال المنزلية في اللهجة الجزائرية"
+      ]
+    },
+    {
+      "id": "ch12",
+      "order": 112,
+      "title": "Chapter 12 draft — The neighbourhood",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 12 on neighbours, streets, buildings, shops, proximity, safety, crowds, local knowledge and asking for help; treat the houma as place and social identity with sourced nuance. Follow the foundation and include the entire standard package: communicative outcome, situation, productive/recognition vocabulary, frames, two purposeful dialogue levels, Arabic/transliteration/English, pronunciation, pragmatics, bounded variants, culture, substitution/retrieval/listening/speaking, recycling, TTS scripts and full metadata, citations/sources and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch12-neighbourhood.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic houma neighbourhood social identity vocabulary",
+        "houma quartier identité sociale Algérie anthropologie urbaine",
+        "الحومة والحي والهوية الاجتماعية في الجزائر"
+      ]
+    },
+    {
+      "id": "ch13",
+      "order": 113,
+      "title": "Chapter 13 draft — Visiting someone",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 13 on entering, sitting, hospitality, coffee/tea, polite insistence and refusal, staying and departure. Avoid invented universal rules or fixed refusal counts. Follow the foundation and provide all standard elements: outcome, realistic visit, controlled productive and recognition vocabulary, frames, two natural dialogue levels, triple rendering, pronunciation, nuanced pragmatics, bounded regional notes, relevant culture, substitution/retrieval/listening/information-gap work, recycling, TTS scripts/full manifest, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch13-visiting.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian hospitality visiting polite insistence refusal Arabic expressions",
+        "hospitalité algérienne visite insistance refus politesse",
+        "الضيافة الجزائرية الزيارة والإلحاح والرفض بأدب"
+      ]
+    },
+    {
+      "id": "sec03",
+      "order": 4,
+      "title": "Section 3 — Home, family and neighbourhood",
+      "kind": "section-editor",
+      "instructions": "Produce the complete polished Section 3 from Chapters 10–13. Do not return notes. Harmonise vocabulary, possession and kinship forms, pragmatic guidance, transliteration, citations and audio IDs; ensure useful recycling across family, home, neighbourhood and visiting contexts. Add a concise opener, cumulative review/listening and a realistic section exit task. Preserve evidence limits, avoid rigid hospitality rules, retain native-review flags and ensure all audio records are complete.",
+      "dependsOn": [
+        "ch10",
+        "ch11",
+        "ch12",
+        "ch13"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/sections/04-section-03-home-family-neighbourhood.md",
+      "includeInCourse": true,
+      "webSearch": false,
+      "researchQueries": []
+    },
+    {
+      "id": "ch14",
+      "order": 114,
+      "title": "Chapter 14 draft — Tea, coffee and the café",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 14 on ordering drinks, sugar, milk, another serving, the bill, waiting and meeting, with a sourced and non-stereotyped café-life strand. Follow the foundation and supply the complete chapter structure: outcome, situation, 10–16 productive and separate recognition items, frames, two purposeful dialogues, Arabic/transliteration/English, pronunciation, pragmatics, bounded variants, culture, substitution/retrieval/listening/speaking, recycling, TTS scripts/full manifest, citations/source list and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch14-cafe.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic café ordering tea coffee bill expressions",
+        "café en Algérie sociabilité commande café thé addition",
+        "المقهى في الجزائر طلب القهوة والشاي والحساب"
+      ]
+    },
+    {
+      "id": "ch15",
+      "order": 115,
+      "title": "Chapter 15 draft — Eating together",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 15 on hunger, thirst, fullness, eating, drinking, tasting, serving, flavour, more, enough and table expressions. Follow the foundation and include outcome, realistic shared-meal situation, controlled productive/recognition vocabulary, reusable frames, accessible and ordinary purposeful dialogues, triple rendering, pronunciation, table pragmatics, bounded variation, relevant culture, substitution/retrieval/listening/personalised speaking, recycling, TTS scripts/full metadata, citations and native-review questions.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch15-eating-together.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic eating drinking table expressions hunger fullness",
+        "expressions de table arabe algérien faim soif rassasié",
+        "تعبيرات الأكل والمائدة والجوع والشبع في اللهجة الجزائرية"
+      ]
+    },
+    {
+      "id": "ch16",
+      "order": 116,
+      "title": "Chapter 16 draft — The Algerian kitchen",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 16 around action verbs cut, wash, mix, boil, fry, bake, add, leave and bring. Use chorba frik, kesra, rechta, couscous, mhajeb, karantika, makroud and qalb el louz chiefly as recognition references where appropriate. Treat recipes as oral family archives and discuss documented adaptation during scarcity, migration or exile without overgeneralising. Include every standard component, full triple rendering, controlled vocabulary, purposeful dialogues, pronunciation, pragmatics, regional notes, exercises/retrieval/listening/speaking, recycling, TTS manifest, citations/sources and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch16-kitchen.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic cooking verbs traditional foods regional names",
+        "cuisine algérienne recettes transmission orale migration pénurie",
+        "المطبخ الجزائري أفعال الطبخ الوصفات الشفوية والهجرة"
+      ]
+    },
+    {
+      "id": "ch17",
+      "order": 117,
+      "title": "Chapter 17 draft — At the market and shops",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 17 on prices, expense, quantity, weight, quality, freshness, colours, sizes and socially appropriate negotiation. Follow the foundation and deliver the full standard chapter: outcome, realistic transaction, productive/recognition split, frames, two purposeful dialogue speeds, Arabic/transliteration/English, pronunciation, nuanced bargaining pragmatics, bounded variants, relevant culture, substitution/retrieval/listening/information-gap tasks, recycling, TTS scripts/full metadata, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch17-market.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic market shopping bargaining prices weights",
+        "marché algérien marchandage prix poids qualité expressions",
+        "السوق الجزائري المساومة والأسعار والأوزان والتعبيرات"
+      ]
+    },
+    {
+      "id": "ch18",
+      "order": 118,
+      "title": "Chapter 18 draft — Numbers, money and time",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 18 teaching numbers through real prices, telephone numbers, clock time, days, dayparts, early and late, including relevant currency-language conventions. Follow the foundation and include the complete chapter package: outcome, realistic exchanges, controlled productive/recognition items, frames, dialogues, Arabic/transliteration/English, pronunciation and number rhythm, pragmatics, bounded variants, relevant culture, substitution/retrieval/listening/information gaps, recycling, TTS scripts/full manifest, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch18-numbers-money-time.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic numbers prices dinar centimes time telephone numbers",
+        "nombres arabe algérien prix dinar douro heure téléphone",
+        "الأعداد والأسعار والدينار والوقت وأرقام الهاتف في الجزائر"
+      ]
+    },
+    {
+      "id": "ch19",
+      "order": 119,
+      "title": "Chapter 19 draft — Finding your way",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 19 on movement, directions, transport, duration, being lost, destinations and landmark-based navigation. Follow the foundation and provide all standard components: outcome and realistic journey; productive/recognition vocabulary; frames; two purposeful dialogue levels; Arabic/transliteration/English; pronunciation; safety and social pragmatics; bounded variants; relevant cultural notes; substitution/retrieval/listening/information-gap practice; recycling; TTS scripts/full metadata; sources and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch19-directions.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic directions transport landmarks being lost",
+        "demander son chemin transports repères arabe algérien",
+        "طلب الطريق والنقل والمعالم في اللهجة الجزائرية"
+      ]
+    },
+    {
+      "id": "sec04",
+      "order": 5,
+      "title": "Section 4 — Eating, shopping and moving around",
+      "kind": "section-editor",
+      "instructions": "Return the complete polished Section 4 from Chapters 14–19. Reconcile food, quantity, number, time and movement vocabulary; preserve controlled productive/recognition status; standardise transliteration, scripts, citations and audio IDs; and ensure recurrence through café, meal, kitchen, market, money/time and navigation situations. Add opener, cumulative listening/retrieval review and a practical multi-stage exit task. Preserve regional bounds, culinary sourcing, native-review flags and complete audio metadata.",
+      "dependsOn": [
+        "ch14",
+        "ch15",
+        "ch16",
+        "ch17",
+        "ch18",
+        "ch19"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/sections/05-section-04-food-shopping-travel.md",
+      "includeInCourse": true,
+      "webSearch": false,
+      "researchQueries": []
+    },
+    {
+      "id": "ch20",
+      "order": 120,
+      "title": "Chapter 20 draft — Talking about yesterday",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 20 on high-frequency past forms, yesterday, last week, what happened and event questions. Teach usable patterns rather than exhaustive paradigms. Follow the foundation and include outcome, situation, 10–16 productive plus recognition items, reusable frames, purposeful accessible and ordinary dialogues, Arabic/transliteration/English, pronunciation, pragmatics, bounded variants, relevant culture, substitution/retrieval/listening/personalised speaking, recycling, TTS scripts/full metadata, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch20-past.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic high frequency past tense forms yesterday",
+        "passé arabe algérien verbes fréquents hier semaine dernière",
+        "الماضي في اللهجة الجزائرية الأفعال الشائعة البارح"
+      ]
+    },
+    {
+      "id": "ch21",
+      "order": 121,
+      "title": "Chapter 21 draft — Telling a short story",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 21 on sequence markers, suddenly, fortunately/unfortunately, reported speech, thought and description, with sourced guidance on repetition, exaggeration and performance in storytelling. Follow the foundation and include the complete standard chapter with controlled vocabulary, two purposeful dialogue/story levels, triple rendering, pronunciation/prosody, pragmatics, bounded variation, exercises and retrieval, listening and personal storytelling, recycling, TTS scripts/full manifest, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch21-storytelling.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic oral storytelling discourse markers reported speech",
+        "récit oral algérien répétition exagération marqueurs narratifs",
+        "السرد الشفهي الجزائري التكرار والمبالغة وروابط الحكاية"
+      ]
+    },
+    {
+      "id": "ch22",
+      "order": 122,
+      "title": "Chapter 22 draft — Plans and intentions",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 22 on near future, plans, later, soon, next week, perhaps, inshallah and conditional ability, including pragmatic interpretation without stereotyping. Follow the foundation and deliver every standard element: outcome, situation, productive/recognition vocabulary, frames, two dialogue levels, Arabic/transliteration/English, pronunciation, pragmatics, bounded variants, relevant culture, substitution/retrieval/listening/personalised tasks, recycling, TTS scripts/full metadata, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch22-plans.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic future plans intention inshallah pragmatics",
+        "futur proche projets inchallah pragmatique arabe algérien",
+        "المستقبل والنية وإن شاء الله في اللهجة الجزائرية"
+      ]
+    },
+    {
+      "id": "ch23",
+      "order": 123,
+      "title": "Chapter 23 draft — Invitations and arrangements",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 23 on availability, meeting times, being busy, alternatives, being on the way and nearly there. Follow the foundation and include the complete standard chapter: communicative outcome, realistic arrangement, controlled productive/recognition language, frames, purposeful dialogues, triple rendering, pronunciation, invitation pragmatics, bounded variants, relevant culture, substitution/retrieval/listening/information-gap work, recycling, TTS scripts/full manifest, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch23-arrangements.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic invitations arrangements on my way nearly there",
+        "invitations rendez-vous en route presque arrivé arabe algérien",
+        "الدعوات والمواعيد وفي الطريق وصلت تقريباً باللهجة الجزائرية"
+      ]
+    },
+    {
+      "id": "ch24",
+      "order": 124,
+      "title": "Chapter 24 draft — Work, study and obligations",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 24 on work, study, starting, finishing, jobs, school, university, tiredness, busyness, lateness, completion and skills. Add a carefully evidenced strand on colonial education/language hierarchy and post-independence multilingual realities. Distinguish documented events from interpretation. Follow the foundation and include all standard chapter components, controlled vocabulary, purposeful dialogues, triple rendering, pronunciation, pragmatics, bounded variants, practice/retrieval/listening/speaking, recycling, TTS metadata, inline citations/source list and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch24-work-study.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic work study obligation vocabulary",
+        "éducation coloniale hiérarchie linguistique Algérie politiques post-indépendance",
+        "التعليم الاستعماري والتسلسل اللغوي وسياسات اللغة بعد الاستقلال في الجزائر"
+      ]
+    },
+    {
+      "id": "sec05",
+      "order": 6,
+      "title": "Section 5 — What happened and what will happen",
+      "kind": "section-editor",
+      "instructions": "Produce the complete revised Section 5 from Chapters 20–24, not a critique. Harmonise high-frequency past/future language, story sequencing, arrangements and work/study obligations; remove paradigm overload and uncontrolled vocabulary; standardise triple rendering, citations and clip IDs. Add opener, cumulative retrieval/listening and an exit task combining a past event, short story and future arrangement. Preserve historical nuance, regional limits, source lists, native-review flags and complete audio manifests.",
+      "dependsOn": [
+        "ch20",
+        "ch21",
+        "ch22",
+        "ch23",
+        "ch24"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/sections/06-section-05-past-future.md",
+      "includeInCourse": true,
+      "webSearch": false,
+      "researchQueries": []
+    },
+    {
+      "id": "ch25",
+      "order": 125,
+      "title": "Chapter 25 draft — Likes, dislikes and opinions",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 25 on preference, thought, opinion, agreement, disagreement and useful evaluative adjectives. Follow the foundation and include the full standard package: outcome, realistic situation, 10–16 productive and separate recognition items, reusable frames, purposeful accessible and ordinary dialogues, Arabic/transliteration/English, pronunciation, nuanced pragmatics, bounded variants, relevant culture, substitution/retrieval/listening/personalised speaking, recycling, TTS scripts/full metadata, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch25-opinions.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic likes dislikes opinions agreement disagreement",
+        "exprimer opinion accord désaccord arabe algérien",
+        "التعبير عن الرأي والإعجاب والاختلاف باللهجة الجزائرية"
+      ]
+    },
+    {
+      "id": "ch26",
+      "order": 126,
+      "title": "Chapter 26 draft — Feelings and wellbeing",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 26 on happiness, sadness, worry, anger, fear, comfort, missing someone, frustration, reassurance and easing hardship. Use emotionally responsible scenarios. Follow the foundation and include every standard element: outcome, situation, controlled productive/recognition language, frames, two purposeful dialogues, triple rendering, pronunciation/prosody, social guidance, bounded variation, relevant culture, substitution/retrieval/listening/personalised tasks, recycling, TTS scripts/full metadata, citations and native-review questions.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch26-feelings.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic emotions reassurance wellbeing expressions",
+        "émotions réconfort inquiétude arabe algérien expressions",
+        "العواطف والطمأنة والقلق في اللهجة الجزائرية"
+      ]
+    },
+    {
+      "id": "ch27",
+      "order": 127,
+      "title": "Chapter 27 draft — Affection, friendship and trust",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 27 on friendship, affection/love, trust, remembering, missing someone, care, reassurance and solidarity, distinguishing registers and relationship boundaries. Follow the foundation and supply the complete standard chapter with outcome, situation, productive/recognition labels, frames, purposeful dialogues, Arabic/transliteration/English, pronunciation, pragmatics, bounded variants, relevant culture, exercises/retrieval/listening/speaking, recycling, TTS scripts/full manifest, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch27-affection-trust.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic friendship affection trust solidarity expressions registers",
+        "amitié affection confiance solidarité arabe algérien registres",
+        "الصداقة والمحبة والثقة والتضامن في اللهجة الجزائرية"
+      ]
+    },
+    {
+      "id": "ch28",
+      "order": 128,
+      "title": "Chapter 28 draft — Disagreement and boundaries",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 28 on refusal, disagreement, enough, privacy, calming down and speaking properly, comparing direct and indirect confrontation without stereotyping. Follow the foundation and include the full standard structure: outcome, safe realistic situations, productive/recognition vocabulary, frames, accessible and ordinary dialogues, triple rendering, pronunciation/tone, pragmatic guidance, bounded variants, relevant culture, substitution/retrieval/listening/personalised practice, recycling, TTS metadata, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch28-boundaries.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic refusal disagreement boundaries calm down pragmatics",
+        "refus désaccord limites confrontation arabe algérien pragmatique",
+        "الرفض والخلاف والحدود والتهدئة في اللهجة الجزائرية"
+      ]
+    },
+    {
+      "id": "ch29",
+      "order": 129,
+      "title": "Chapter 29 draft — Humour, teasing and indirect speech",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 29 on joking, disbelief, playful address, understatement, exaggeration and tone. Include only evidenced, safe examples and a bounded strand on humour, ambiguity and coded speech under hardship or authority. Follow the foundation and include the complete standard chapter. Mark humour as requiring human recording and native validation; provide triple rendering, prosody, pragmatic cautions, exercises, listening, TTS limitations/full manifest, citations and sources.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch29-humour.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic humour teasing indirect speech pragmatics",
+        "humour algérien sous-entendu exagération discours codé",
+        "الفكاهة الجزائرية والتلميح والمبالغة والكلام المشفر"
+      ]
+    },
+    {
+      "id": "ch30",
+      "order": 130,
+      "title": "Chapter 30 draft — Proverbs and compressed wisdom",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 30 using only verified, genuinely useful Algerian proverbs in situations involving patience, neighbours, family, work, fortune, hospitality, appearances or self-reliance. Teach appropriate responses and contexts, not lists or literal translations. Never invent or silently alter a proverb. Follow the full chapter structure with productive language kept small and proverbs often recognition-level; triple rendering; source evidence and variants; purposeful dialogues; pronunciation; pragmatics; practice and retrieval; listening; human-recording requirements; complete manifest; and explicit native-review questions.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch30-proverbs.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "documented Algerian Arabic proverbs corpus usage context",
+        "proverbes populaires algériens sources contexte usage",
+        "الأمثال الشعبية الجزائرية مصادر واستعمال وسياق"
+      ]
+    },
+    {
+      "id": "sec06",
+      "order": 7,
+      "title": "Section 6 — Speaking like a person, not a phrasebook",
+      "kind": "section-editor",
+      "instructions": "Return the complete polished Section 6 from Chapters 25–30. Reconcile overlapping emotion, affection, disagreement and reassurance vocabulary; keep register and relationship guidance explicit; standardise script, transliteration, citations and audio IDs. Verify that humour and proverbs remain sourced, situational and native-review flagged. Add opener, cumulative listening/retrieval work and an exit interaction involving opinion, emotion, tactful disagreement and repair. Preserve full chapters and audio manifests.",
+      "dependsOn": [
+        "ch25",
+        "ch26",
+        "ch27",
+        "ch28",
+        "ch29",
+        "ch30"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/sections/07-section-06-social-intelligence.md",
+      "includeInCourse": true,
+      "webSearch": false,
+      "researchQueries": []
+    },
+    {
+      "id": "ch31",
+      "order": 131,
+      "title": "Chapter 31 draft — Travelling across Algeria",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 31 on coast, mountains, desert, village, city, selected places, origins, regional identity and asking for local wording. Avoid turning geography into stereotypes. Follow the foundation and include the complete standard chapter: outcome, journey situation, controlled productive/recognition vocabulary, frames, two dialogues, triple rendering, pronunciation, respectful pragmatics, bounded regional notes, sourced cultural/geographic material, exercises/retrieval/listening/speaking, recycling, TTS/full metadata, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch31-travelling-algeria.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algeria regional geography identities Darja local wording",
+        "régions d’Algérie identités locales variation arabe algérien",
+        "مناطق الجزائر والهويات المحلية والاختلاف اللغوي"
+      ]
+    },
+    {
+      "id": "ch32",
+      "order": 132,
+      "title": "Chapter 32 draft — The many voices of Algeria",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 32 on Darja, MSA, Tamazight varieties, French, western Spanish influence, Ottoman and Mediterranean vocabulary, social meaning and code-switching. Teach recognition and coping strategies, not stereotypes or simplistic etymologies. Follow the full standard chapter structure, keeping productive language controlled; cite linguistic claims; distinguish borrowing from active switching; provide bounded examples, purposeful dialogues, triple rendering, pronunciation, exercises/listening, full audio metadata and targeted native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch32-many-voices.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian multilingualism Darja Tamazight French Spanish Ottoman loanwords code switching",
+        "multilinguisme Algérie emprunts espagnols ottomans alternance codique",
+        "التعدد اللغوي في الجزائر الأمازيغية والفرنسية والاقتراض والتناوب اللغوي"
+      ]
+    },
+    {
+      "id": "ch33",
+      "order": 133,
+      "title": "Chapter 33 draft — Chaâbi and the city",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 33 on listening vocabulary, love, absence, patience, fortune, urban settings, the Casbah, cafés and poetry entering conversation. Provide informed, sourced context for chaâbi without reproducing copyrighted lyrics. Use original practice lines. Follow every standard chapter requirement, with music-influenced material marked for native human recording, bounded claims, triple rendering, listening strategy, citations, source list and native-review questions.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch33-chaabi.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian chaabi music Casbah cafés poetry language history",
+        "musique chaâbi algéroise Casbah poésie cafés histoire",
+        "الموسيقى الشعبي الجزائرية القصبة والشعر والمقاهي"
+      ]
+    },
+    {
+      "id": "ch34",
+      "order": 134,
+      "title": "Chapter 34 draft — Raï: saying what cannot easily be said",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 34 on love, desire, departure, social pressure, western pronunciation, Arabic–French alternation and carefully sourced references to major raï performers. Do not reproduce lyrics; create original practice lines. Follow the complete chapter template, distinguish productive from recognition language, avoid claims that one genre speaks for everyone, provide triple rendering, pronunciation/listening work, code-switching metadata, human-recording requirements, citations/sources and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch34-rai.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "rai music Algeria language code switching western Algerian pronunciation history",
+        "raï algérien alternance arabe français Oran histoire artistes",
+        "موسيقى الراي الجزائرية وهران التناوب بين العربية والفرنسية"
+      ]
+    },
+    {
+      "id": "ch35",
+      "order": 135,
+      "title": "Chapter 35 draft — Andalusi, Malouf, Kabyle and Diwan traditions",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 35 introducing Andalusi, Malouf, Kabyle and Diwan traditions through place, occasion, instruments, performers and audiences without flattening distinct traditions into one genre. Follow the full standard chapter structure, using culturally necessary low-frequency terms mainly for recognition. Include sourced context, original practice language rather than lyrics, triple rendering, listening tasks, pronunciation, bounded regional notes, human-recording flags, full audio metadata and native-review questions.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch35-music-traditions.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algeria Andalusi Malouf Kabyle Diwan music traditions instruments regions",
+        "musiques andalouse malouf kabyle diwan Algérie instruments publics",
+        "الموسيقى الأندلسية والمالوف والقبائلية والديوان في الجزائر"
+      ]
+    },
+    {
+      "id": "ch36",
+      "order": 136,
+      "title": "Chapter 36 draft — Celebrations and collective life",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 36 on weddings, Ramadan evenings, Eid, births, visits, clothing, food, congratulations, blessings and condolences. Avoid universal ritual rules and distinguish occasions, regions and relationships. Follow the complete standard chapter structure with controlled productive/recognition language, purposeful dialogues, Arabic/transliteration/English, pronunciation, nuanced pragmatics, bounded cultural notes, practice/retrieval/listening/speaking, full audio metadata, citations and native-review flags. Require human recording for emotionally sensitive condolences.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch36-celebrations.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic congratulations condolences weddings Eid expressions",
+        "fêtes mariages Ramadan condoléances formules Algérie",
+        "التهاني والتعازي والأعراس ورمضان والعيد في الجزائر"
+      ]
+    },
+    {
+      "id": "sec07",
+      "order": 8,
+      "title": "Section 7 — Cultural fluency",
+      "kind": "section-editor",
+      "instructions": "Produce the complete polished Section 7 from Chapters 31–36. Standardise transliteration, regional labels, music terminology, citations and audio IDs; keep low-frequency place/music terminology primarily recognition-level; prevent stereotypes and unsupported etymologies; and ensure no lyrics are reproduced. Add opener, integrated listening/retrieval review and a section exit task involving travel, local wording, music preferences and an appropriate social formula. Retain all native-recording requirements and full manifests.",
+      "dependsOn": [
+        "ch31",
+        "ch32",
+        "ch33",
+        "ch34",
+        "ch35",
+        "ch36"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/sections/08-section-07-cultural-fluency.md",
+      "includeInCourse": true,
+      "webSearch": false,
+      "researchQueries": []
+    },
+    {
+      "id": "ch37",
+      "order": 137,
+      "title": "Chapter 37 draft — Before, during and after",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 37 on time framing, long ago, arrival, taking, changing, remaining, keeping, independence and freedom. Teach through personal-story situations while clearly separating documented event, memory, collective narrative and editorial interpretation. Follow every standard chapter requirement, including controlled vocabulary, purposeful dialogues, triple rendering, pronunciation, sensitive pragmatics, relevant sourced history, exercises/retrieval/listening/speaking, human-recording guidance, full metadata, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch37-before-during-after.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic vocabulary independence colonial period oral history",
+        "Algérie colonisation indépendance chronologie sources algériennes histoire orale",
+        "الجزائر الاستعمار والاستقلال التسلسل الزمني والتاريخ الشفهي"
+      ]
+    },
+    {
+      "id": "ch38",
+      "order": 138,
+      "title": "Chapter 38 draft — Land, home and displacement",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 38 on land, home, village, city, ownership, loss, departure, return, documents and ancestral places; connect names, stories, recipes, graves, visits and family memory only through documented or explicitly framed personal mechanisms. Follow the full standard chapter structure with sensitive realistic stories, controlled vocabulary, triple rendering, pronunciation, pragmatics, bounded claims, exercises/listening/speaking, human recording, complete manifest, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch38-land-displacement.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algeria land displacement colonial property documents family memory",
+        "Algérie dépossession foncière déplacement retour mémoire familiale",
+        "نزع الأراضي والتهجير والعودة والذاكرة العائلية في الجزائر"
+      ]
+    },
+    {
+      "id": "ch39",
+      "order": 139,
+      "title": "Chapter 39 draft — School, language and imposed hierarchy",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 39 on school, teachers, books, permission, prohibition, reading, writing and learning. Explain French, Arabic and Amazigh language hierarchy under colonialism and later multilingual realities with careful evidence and periodisation. Follow the complete chapter template, separating fact, memory and interpretation; include controlled vocabulary, purposeful dialogues, triple rendering, pronunciation, pragmatics, exercises/retrieval/listening/speaking, full audio metadata, citations/source list and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch39-school-language-hierarchy.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "colonial Algeria education language policy French Arabic Amazigh hierarchy",
+        "Algérie coloniale école politique linguistique arabe berbère français",
+        "التعليم والسياسة اللغوية في الجزائر الاستعمارية العربية والأمازيغية والفرنسية"
+      ]
+    },
+    {
+      "id": "ch40",
+      "order": 140,
+      "title": "Chapter 40 draft — Resistance, secrecy and solidarity",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 40 on resist, hide, help, protect, carry, secret, message, news, trust and betrayal. Distinguish survival, accommodation and collaboration; avoid heroic simplification and invented anecdotes. Follow the standard chapter structure using carefully sourced personal-story situations, controlled vocabulary, two purposeful dialogue levels, triple rendering, pronunciation, sensitive pragmatics, exercises/listening, human-recording requirements, complete metadata, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch40-resistance-solidarity.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian War resistance civilian networks secrecy solidarity scholarship",
+        "guerre d’Algérie réseaux civils aide clandestinité accommodation collaboration",
+        "الثورة الجزائرية الشبكات المدنية والسرية والتضامن والتعاون"
+      ]
+    },
+    {
+      "id": "ch41",
+      "order": 141,
+      "title": "Chapter 41 draft — Women, oral memory and invisible work",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 41 on women’s combatant and non-combatant, domestic, medical, logistical and oral-memory work, asking whose experiences enter official history. Avoid treating women as a single group or inventing testimony. Follow the full standard chapter structure with language for remembering, carrying, caring and telling; controlled vocabulary; triple rendering; sensitive pragmatics; sourced examples; exercises/listening/speaking; human-recording requirements; full manifest; citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch41-women-oral-memory.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian women war domestic medical logistical oral memory scholarship",
+        "femmes guerre d’Algérie travail logistique médical mémoire orale historiennes algériennes",
+        "المرأة الجزائرية الثورة العمل الطبي واللوجستي والذاكرة الشفوية"
+      ]
+    },
+    {
+      "id": "ch42",
+      "order": 142,
+      "title": "Chapter 42 draft — Migration, exile and the journey to France",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 42 on leaving, arriving, work, papers, borders, loneliness, remittances, return, diaspora children and intergenerational language. Treat distinct migration periods and experiences carefully and avoid assuming France is every learner’s destination. Follow the complete template with controlled language, purposeful dialogues, triple rendering, pronunciation, sensitive pragmatics, bounded history, exercises/retrieval/listening/speaking, human recording, full metadata, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch42-migration-france.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian migration France remittances return intergenerational language",
+        "migration algérienne France transferts retour langue intergénérationnelle",
+        "الهجرة الجزائرية إلى فرنسا والتحويلات والعودة واللغة بين الأجيال"
+      ]
+    },
+    {
+      "id": "ch43",
+      "order": 143,
+      "title": "Chapter 43 draft — Memory without rehearsed slogans",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 43 on remembering, uncertainty, family accounts, disagreement, evidence, pain, pride, silence and inheritance. Model epistemic caution and disagreement among accounts without reducing Algerians to victims, romanticising suffering or making one memory national. Follow every standard chapter requirement with controlled vocabulary, purposeful dialogues, triple rendering, pronunciation and emotional intent, sensitive pragmatics, retrieval/listening/personalised speaking, mandatory human-recording notes, complete metadata, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch43-memory.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian memory colonial war family testimony silence historiography",
+        "mémoire guerre d’Algérie récits familiaux silence désaccord historiographie",
+        "ذاكرة حرب الجزائر الروايات العائلية الصمت والاختلاف"
+      ]
+    },
+    {
+      "id": "sec08",
+      "order": 9,
+      "title": "Section 8 — Memory and resilience",
+      "kind": "section-editor",
+      "instructions": "Return the complete polished Section 8 from Chapters 37–43, not comments. Preserve a personal-story, family-conversation, place and object orientation rather than a detached textbook. Reconcile language and timelines; clearly label documented events, memory, collective narrative and interpretation; remove unsupported causality or invented testimony; and standardise citations, transliteration and audio IDs. Add opener, careful cumulative review/listening and an exit task allowing uncertainty and multiple accounts. Preserve full source lists, native-review flags and mandatory human-recording guidance.",
+      "dependsOn": [
+        "ch37",
+        "ch38",
+        "ch39",
+        "ch40",
+        "ch41",
+        "ch42",
+        "ch43"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/sections/09-section-08-memory-resilience.md",
+      "includeInCourse": true,
+      "webSearch": false,
+      "researchQueries": []
+    },
+    {
+      "id": "ch44",
+      "order": 144,
+      "title": "Chapter 44 draft — Phones, messages and Arabizi",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 44 on calling, sending, answering, recording, voice notes, online status, common digit substitutions, spelling variation and movement between scripts. Keep pedagogical transliteration explicitly separate from informal Arabizi and avoid prescribing one Arabizi spelling. Follow the complete standard chapter structure with controlled productive/recognition vocabulary, realistic message exchanges, triple rendering, pronunciation, pragmatics, bounded variants, exercises/listening/speaking, TTS/full manifest, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch44-phones-arabizi.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabizi digit substitutions spelling variation messaging",
+        "Arabizi algérien chiffres orthographe SMS réseaux sociaux",
+        "العربيزي الجزائري أرقام وتهجئة الرسائل ومواقع التواصل"
+      ]
+    },
+    {
+      "id": "ch45",
+      "order": 145,
+      "title": "Chapter 45 draft — News, rumours and credibility",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 45 on hearing claims, truth, uncertainty, sources, verification and distinguishing information from gossip. Teach practical epistemic language without presenting the chapter as media-law advice. Follow the full standard chapter structure: outcome, situation, controlled vocabulary, frames, two dialogues, triple rendering, pronunciation, social pragmatics, bounded variants, relevant contemporary context, retrieval/listening/information-gap practice, TTS/full metadata, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch45-news-rumours.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic truth rumour uncertainty source verification expressions",
+        "rumeur vérité source vérifier arabe algérien expressions",
+        "الإشاعة والحقيقة والمصدر والتحقق باللهجة الجزائرية"
+      ]
+    },
+    {
+      "id": "ch46",
+      "order": 146,
+      "title": "Chapter 46 draft — Contemporary aspirations and frustrations",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 46 on housing, work, prices, travel, education, family expectations, opportunity, hope and uncertainty. Discuss harga carefully, with evidence, harm-aware language and no romanticisation. Follow all standard chapter requirements: outcome, realistic situations, controlled productive/recognition language, purposeful dialogues, triple rendering, pronunciation, pragmatics, bounded claims, exercises/retrieval/listening/personalised speaking, human recording where sensitive, full manifest, citations and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch46-aspirations.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian youth aspirations housing employment harga research",
+        "jeunesse algérienne logement emploi harga aspirations études",
+        "الشباب الجزائري السكن والعمل والحرقة والطموحات دراسات"
+      ]
+    },
+    {
+      "id": "ch47",
+      "order": 147,
+      "title": "Chapter 47 draft — Hosting a complete conversation",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 47 as an integration chapter combining greeting, introduction, family, food, past events, plans, opinions, emotion, clarification and departure in believable hosted conversations. Add very little new vocabulary. Follow the complete chapter structure, with accessible and ordinary anchor dialogues, triple rendering, connected-speech work, social guidance, bounded variation, extensive substitution/retrieval/listening/information-gap practice, TTS prototypes plus preferred native anchor recording, full metadata, citations where needed and native-review flags.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch47-complete-conversation.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic natural conversation hospitality discourse sequence",
+        "conversation naturelle hospitalité arabe algérien ouverture clôture réparation",
+        "المحادثة الطبيعية والضيافة وافتتاح الكلام واختتامه باللهجة الجزائرية"
+      ]
+    },
+    {
+      "id": "ch48",
+      "order": 148,
+      "title": "Chapter 48 draft — Listening to Algeria",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 48 around authentic-style voices from different regions, generations and social settings. Teach identification of structure, tone and key information without requiring perfect comprehension. Use bounded, sourced regional features and never ask generic TTS to fabricate accents. Follow the full chapter template, keeping new productive vocabulary minimal; provide multiple listening scripts with triple rendering, speaker profiles, recognition strategies, exercises and retrieval, complete manifests, human-recording requirements, citations and native-review questions.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch48-listening-algeria.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic regional variation western eastern Saharan recordings",
+        "variation régionale arabe algérien ouest est Sahara corpus oral",
+        "التنوع الجهوي في اللهجة الجزائرية الغرب الشرق الصحراء تسجيلات"
+      ]
+    },
+    {
+      "id": "ch49",
+      "order": 149,
+      "title": "Chapter 49 draft — Final project: one family, one neighbourhood, one story",
+      "kind": "chapter-draft",
+      "instructions": "Draft Chapter 49 as a scaffolded spoken dossier containing self-introduction, family or community, food, music, memory/history, a present concern and a future hope. Minimise new vocabulary and provide ethical alternatives for learners who do not wish to disclose personal material. Follow the standard chapter structure adapted to a capstone: outcome, model situations, productive/recognition labels, frames, purposeful models in triple rendering, pronunciation and rehearsal, pragmatic/source guidance, retrieval and listening, staged production rubric, TTS rehearsal scripts/full metadata, citations where used and native-review checkpoints.",
+      "dependsOn": [
+        "foundation"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/drafts/ch49-final-project.md",
+      "includeInCourse": false,
+      "webSearch": true,
+      "researchQueries": [
+        "language course spoken portfolio assessment beginner conversation rubric",
+        "évaluation portfolio oral langue projet final conversation",
+        "تقييم ملف شفهي لتعلم اللغة مشروع محادثة نهائي"
+      ]
+    },
+    {
+      "id": "sec09",
+      "order": 10,
+      "title": "Section 9 — Speaking in the present-day world",
+      "kind": "section-editor",
+      "instructions": "Produce the complete polished Section 9 from Chapters 44–49. Reconcile Arabizi, credibility, contemporary-issues and integration language; keep new vocabulary low in Chapters 47–49; standardise triple rendering, citations and audio IDs. Ensure regional listening material is bounded and requires appropriate human recordings. Add section opener, cumulative review and a clear exit/capstone pathway culminating in the spoken dossier, including an assessment rubric and privacy-respecting alternatives. Return full chapters and complete manifests, not editorial notes.",
+      "dependsOn": [
+        "ch44",
+        "ch45",
+        "ch46",
+        "ch47",
+        "ch48",
+        "ch49"
+      ],
+      "dependencyInput": "full",
+      "outputFile": "output/sections/10-section-09-contemporary-conversation.md",
+      "includeInCourse": true,
+      "webSearch": false,
+      "researchQueries": []
+    },
+    {
+      "id": "appendices",
+      "order": 11,
+      "title": "Final appendices",
+      "kind": "appendix",
+      "instructions": "Using summaries of the nine final sections and the foundation, produce concise, learner-usable appendices: productive core vocabulary organised by function; high-frequency verb patterns; bounded regional listening guide; French borrowing versus active code-switching guide; food and music map; concise and carefully sourced historical timeline; fifty-expression conversation survival sheet; and audio-programme/recording-manifest guidance. Reconcile duplicate forms, preserve Arabic script/transliteration/natural English, label recognition and regional items, cite factual maps/timeline claims, flag native-review needs and do not introduce a large new lexicon. The audio appendix must restate every required metadata field and distinguish acceptable TTS prototypes from required human recording.",
+      "dependsOn": [
+        "foundation",
+        "sec01",
+        "sec02",
+        "sec03",
+        "sec04",
+        "sec05",
+        "sec06",
+        "sec07",
+        "sec08",
+        "sec09"
+      ],
+      "dependencyInput": "summary",
+      "outputFile": "output/11-appendices.md",
+      "includeInCourse": true,
+      "webSearch": true,
+      "researchQueries": [
+        "Algerian Arabic high frequency vocabulary verbs regional variation bibliography",
+        "chronologie concise histoire Algérie sources universitaires algériennes",
+        "التسلسل الزمني لتاريخ الجزائر ومصادر جامعية جزائرية",
+        "Algerian music food regional map institutional sources"
+      ]
+    }
+  ]
+}

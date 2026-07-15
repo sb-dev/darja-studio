@@ -1,0 +1,251 @@
+{
+  "runId": "f5a39de2-1361-4bb1-9812-7d46ef0e28ca",
+  "createdAt": "2026-07-15T12:04:30.353Z",
+  "updatedAt": "2026-07-15T12:04:30.353Z",
+  "tasks": {
+    "foundation": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "introduction": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch01": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch02": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch03": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch04": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "sec01": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch05": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch06": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch07": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch08": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch09": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "sec02": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch10": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch11": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch12": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch13": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "sec03": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch14": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch15": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch16": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch17": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch18": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch19": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "sec04": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch20": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch21": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch22": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch23": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch24": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "sec05": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch25": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch26": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch27": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch28": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch29": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch30": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "sec06": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch31": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch32": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch33": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch34": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch35": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch36": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "sec07": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch37": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch38": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch39": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch40": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch41": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch42": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch43": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "sec08": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch44": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch45": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch46": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch47": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch48": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "ch49": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "sec09": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "appendices": {
+      "status": "pending",
+      "attempts": 0
+    }
+  }
+}
