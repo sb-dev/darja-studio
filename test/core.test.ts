@@ -5,12 +5,14 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
+import { config } from "../src/config.js";
 import { validatePlanGraph } from "../src/graph.js";
 import { parsePositiveInteger } from "../src/integer.js";
 import { sectionChunkInput } from "../src/prompts.js";
 import {
   UsageLedgerEntrySchema,
   calculateModelCost,
+  missingParsedResultError,
   summarizeUsage
 } from "../src/usage.js";
 import type {
@@ -68,6 +70,10 @@ async function projectFixture(
   );
   return directory;
 }
+
+test("OpenAI requests default to a 30-minute timeout", () => {
+  assert.equal(config.openAITimeoutMs, 30 * 60 * 1_000);
+});
 
 test("positive integer parsing rejects partially numeric values", () => {
   assert.equal(parsePositiveInteger("3", "--limit"), 3);
@@ -369,4 +375,40 @@ test("status reports malformed ledger lines", async () => {
 
   assert.equal(result.status, 1);
   assert.match(result.stderr, /Invalid usage ledger entry on line 1/);
+});
+
+test("missing parsed results include response diagnostics", () => {
+  const error = missingParsedResultError("Task foundation", {
+    id: "resp_1",
+    _request_id: "req_1",
+    status: "incomplete",
+    incomplete_details: { reason: "max_output_tokens" },
+    output: [{ type: "reasoning" }]
+  });
+  assert.match(error.message, /status=incomplete/);
+  assert.match(error.message, /response_id=resp_1/);
+  assert.match(error.message, /request_id=req_1/);
+  assert.match(error.message, /incomplete_reason=max_output_tokens/);
+  assert.match(error.message, /output_types=reasoning/);
+});
+
+test("legacy ledger entries remain valid without diagnostic fields", () => {
+  assert.doesNotThrow(() =>
+    UsageLedgerEntrySchema.parse({
+      schemaVersion: 1,
+      eventId: "00000000-0000-4000-8000-000000000010",
+      timestamp: new Date(0).toISOString(),
+      runId: "00000000-0000-4000-8000-000000000001",
+      context: { operation: "task", taskId: "foundation", attempt: 1 },
+      type: "model_response",
+      responseId: null,
+      requestedModel: "gpt-5.6",
+      returnedModel: null,
+      status: "failed",
+      tokens: null,
+      rates: null,
+      costUsd: null,
+      error: "Request timed out."
+    })
+  );
 });

@@ -27,7 +27,12 @@ import {
   writeJsonAtomic,
   writeText
 } from "./store.js";
-import { readUsageLedger, summarizeUsage, trackOpenAIResponse } from "./usage.js";
+import {
+  missingParsedResultError,
+  readUsageLedger,
+  summarizeUsage,
+  trackOpenAIResponse
+} from "./usage.js";
 
 function now(): string {
   return new Date().toISOString();
@@ -161,7 +166,7 @@ async function generateTask(
 
   const response = await trackOpenAIResponse(
     runId,
-    { operation: "task", taskId: task.id, attempt },
+    { operation: "task", taskId: task.id, attempt, webSearch: task.webSearch },
     () => getOpenAI().responses.parse({
     model: config.model,
     instructions: TASK_INSTRUCTIONS,
@@ -178,7 +183,7 @@ async function generateTask(
 
   const result = response.output_parsed;
   if (!result) {
-    throw new Error(`Task ${task.id} returned no parsed result.`);
+    throw missingParsedResultError(`Task ${task.id}`, response);
   }
 
   await Promise.all([
@@ -235,7 +240,8 @@ async function generateSectionTask(
         attempt,
         draftId: draft.id,
         chunkIndex: index,
-        chunkCount: drafts.length
+        chunkCount: drafts.length,
+        webSearch: task.webSearch
       },
       () => getOpenAI().responses.parse({
       model: config.model,
@@ -261,8 +267,9 @@ async function generateSectionTask(
 
     const result = response.output_parsed;
     if (!result) {
-      throw new Error(
-        `Section editor ${task.id} returned no parsed result for ${draft.id}.`
+      throw missingParsedResultError(
+        `Section editor ${task.id} for ${draft.id}`,
+        response
       );
     }
 

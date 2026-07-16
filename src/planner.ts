@@ -14,7 +14,7 @@ import {
   readText,
   writeJsonAtomic
 } from "./store.js";
-import { trackOpenAIResponse } from "./usage.js";
+import { missingParsedResultError, trackOpenAIResponse } from "./usage.js";
 
 export async function createPlan(force = false): Promise<void> {
   await ensureProjectDirectories();
@@ -45,7 +45,7 @@ export async function createPlan(force = false): Promise<void> {
 
   const plan = response.output_parsed;
   if (!plan) {
-    throw new Error("The planner did not return a parsed task graph.");
+    throw missingParsedResultError("The planner", response);
   }
 
   validatePlanGraph(plan);
