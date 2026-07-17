@@ -163,6 +163,23 @@ export function buildFailureLedgerEntry(
   };
 }
 
+// The SDK reports anything matching /timed? ?out/i as APIConnectionTimeoutError with a
+// bare "Request timed out." and no cause — including a transport timeout it never set.
+// Record what we asked for so a shorter elapsed time reads as someone else's ceiling.
+function timeoutDiagnostic(
+  error: TrackableError,
+  durationMs: number
+): string | undefined {
+  if (error.cause !== undefined) return undefined;
+  if (!/timed? ?out/i.test(errorMessage(error))) return undefined;
+
+  const ours = durationMs >= config.openAITimeoutMs;
+  return (
+    `configured_timeout_ms=${config.openAITimeoutMs} ` +
+    `timeout_source=${ours ? "client" : "transport-or-server"}`
+  );
+}
+
 export interface UsageSummary {
   responses: number;
   webSearches: number;
@@ -179,10 +196,23 @@ function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
+// A parse failure that carries whether re-issuing the identical request could help.
+// A `max_output_tokens` truncation is deterministic — an identical retry re-truncates —
+// so it is marked non-retryable; other incompletes stay retryable.
+export class NoParsedResultError extends Error {
+  readonly retryable: boolean;
+
+  constructor(message: string, retryable: boolean) {
+    super(message);
+    this.name = "NoParsedResultError";
+    this.retryable = retryable;
+  }
+}
+
 export function missingParsedResultError(
   label: string,
   response: TrackableResponse
-): Error {
+): NoParsedResultError {
   const outputTypes = (response.output ?? [])
     .map((item) =>
       item && typeof item === "object" && "type" in item
@@ -201,7 +231,11 @@ export function missingParsedResultError(
     response.error?.message ? `error_message=${response.error.message}` : undefined,
     outputTypes ? `output_types=${outputTypes}` : undefined
   ].filter(Boolean);
-  return new Error(`${label} returned no parsed result (${details.join(", ")}).`);
+  const retryable = response.incomplete_details?.reason !== "max_output_tokens";
+  return new NoParsedResultError(
+    `${label} returned no parsed result (${details.join(", ")}).`,
+    retryable
+  );
 }
 
 function isGpt56(model: string | null): boolean {
@@ -328,6 +362,7 @@ export async function trackOpenAIResponse<T>(
     const durationMs = Date.now() - startedAt;
     const apiError = error as TrackableError;
     const cause = causeMessage(apiError);
+    const timeout = timeoutDiagnostic(apiError, durationMs);
     console.error(
       `[openai:${label}] failed elapsed_ms=${durationMs} ` +
         `error_type=${apiError.name ?? "unknown"} ` +
@@ -336,7 +371,8 @@ export async function trackOpenAIResponse<T>(
         `api_type=${apiError.type ?? "unknown"} ` +
         `request_id=${apiError.requestID ?? "unknown"} ` +
         `message=${errorMessage(error)}` +
-        (cause ? ` cause=${cause}` : "")
+        (cause ? ` cause=${cause}` : "") +
+        (timeout ? ` ${timeout}` : "")
     );
     const entry = buildFailureLedgerEntry(runId, context, error, durationMs);
     try {
