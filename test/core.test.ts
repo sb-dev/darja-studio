@@ -5,12 +5,15 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
+import { config } from "../src/config.js";
 import { validatePlanGraph } from "../src/graph.js";
 import { parsePositiveInteger } from "../src/integer.js";
 import { sectionChunkInput } from "../src/prompts.js";
 import {
   UsageLedgerEntrySchema,
+  buildFailureLedgerEntry,
   calculateModelCost,
+  missingParsedResultError,
   summarizeUsage
 } from "../src/usage.js";
 import type {
@@ -68,6 +71,10 @@ async function projectFixture(
   );
   return directory;
 }
+
+test("OpenAI requests default to a 30-minute timeout", () => {
+  assert.equal(config.openAITimeoutMs, 30 * 60 * 1_000);
+});
 
 test("positive integer parsing rejects partially numeric values", () => {
   assert.equal(parsePositiveInteger("3", "--limit"), 3);
@@ -369,4 +376,67 @@ test("status reports malformed ledger lines", async () => {
 
   assert.equal(result.status, 1);
   assert.match(result.stderr, /Invalid usage ledger entry on line 1/);
+});
+
+test("missing parsed results include response diagnostics", () => {
+  const error = missingParsedResultError("Task foundation", {
+    id: "resp_1",
+    _request_id: "req_1",
+    status: "incomplete",
+    incomplete_details: { reason: "max_output_tokens" },
+    output: [{ type: "reasoning" }]
+  });
+  assert.match(error.message, /status=incomplete/);
+  assert.match(error.message, /response_id=resp_1/);
+  assert.match(error.message, /request_id=req_1/);
+  assert.match(error.message, /incomplete_reason=max_output_tokens/);
+  assert.match(error.message, /output_types=reasoning/);
+});
+
+test("failed requests map API error metadata onto the ledger entry", () => {
+  const apiError = Object.assign(new Error("Request timed out."), {
+    name: "APIConnectionTimeoutError",
+    status: 504,
+    code: "timeout",
+    requestID: "req_failed_1"
+  });
+  const entry = buildFailureLedgerEntry(
+    "00000000-0000-4000-8000-000000000001",
+    { operation: "task", taskId: "foundation", attempt: 1 },
+    apiError,
+    12_345
+  );
+
+  assert.equal(entry.type, "model_response");
+  assert.equal(entry.status, "failed");
+  assert.equal(entry.error, "Request timed out.");
+  assert.equal(entry.durationMs, 12_345);
+  assert.equal(entry.parsed, false);
+  assert.equal(entry.requestId, "req_failed_1");
+  assert.equal(entry.errorType, "APIConnectionTimeoutError");
+  assert.equal(entry.httpStatus, 504);
+  assert.equal(entry.errorCode, "timeout");
+  // Entry validates against the schema so failure rows persist cleanly.
+  assert.doesNotThrow(() => UsageLedgerEntrySchema.parse(entry));
+});
+
+test("legacy ledger entries remain valid without diagnostic fields", () => {
+  assert.doesNotThrow(() =>
+    UsageLedgerEntrySchema.parse({
+      schemaVersion: 1,
+      eventId: "00000000-0000-4000-8000-000000000010",
+      timestamp: new Date(0).toISOString(),
+      runId: "00000000-0000-4000-8000-000000000001",
+      context: { operation: "task", taskId: "foundation", attempt: 1 },
+      type: "model_response",
+      responseId: null,
+      requestedModel: "gpt-5.6",
+      returnedModel: null,
+      status: "failed",
+      tokens: null,
+      rates: null,
+      costUsd: null,
+      error: "Request timed out."
+    })
+  );
 });

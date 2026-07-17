@@ -23,6 +23,10 @@ pnpm generate
 
 `pnpm generate` creates the plan if needed, then runs tasks until the course is complete or a task exhausts its retries.
 
+OpenAI requests have a 30-minute timeout by default. Override it with
+`OPENAI_TIMEOUT_MS`; SDK-level retries are disabled because task retries are
+handled and logged by the runner.
+
 The process runs in the foreground. It is safe to stop it and resume later:
 
 ```bash

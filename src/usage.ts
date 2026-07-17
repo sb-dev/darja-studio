@@ -31,7 +31,8 @@ const ContextSchema = z.object({
   attempt: z.number().int().positive().optional(),
   draftId: z.string().optional(),
   chunkIndex: z.number().int().nonnegative().optional(),
-  chunkCount: z.number().int().positive().optional()
+  chunkCount: z.number().int().positive().optional(),
+  webSearch: z.boolean().optional()
 });
 
 const CommonSchema = z.object({
@@ -51,7 +52,14 @@ export const ModelResponseLedgerEntrySchema = CommonSchema.extend({
   tokens: TokenUsageSchema.nullable(),
   rates: RatesSchema.nullable(),
   costUsd: z.number().nonnegative().nullable(),
-  error: z.string().optional()
+  error: z.string().optional(),
+  durationMs: z.number().int().nonnegative().optional(),
+  requestId: z.string().nullable().optional(),
+  errorType: z.string().optional(),
+  httpStatus: z.number().int().optional(),
+  errorCode: z.string().optional(),
+  incompleteReason: z.string().optional(),
+  parsed: z.boolean().optional()
 });
 
 export const WebSearchLedgerEntrySchema = CommonSchema.extend({
@@ -86,10 +94,23 @@ interface ResponseUsage {
 
 interface TrackableResponse {
   id?: string;
+  _request_id?: string | null;
   model?: string;
   status?: string | null;
   usage?: ResponseUsage | null;
   output?: unknown[];
+  output_parsed?: unknown;
+  incomplete_details?: { reason?: string | null } | null;
+  error?: { code?: string; message?: string } | null;
+}
+
+interface TrackableError {
+  name?: string;
+  status?: number;
+  code?: string | null;
+  type?: string;
+  requestID?: string | null;
+  cause?: unknown;
 }
 
 interface EffectiveRates {
@@ -99,6 +120,47 @@ interface EffectiveRates {
   cachedInputPerMillion: number;
   cacheWritePerMillion: number;
   outputPerMillion: number;
+}
+
+function contextLabel(context: UsageContext): string {
+  return [context.operation, context.taskId, context.draftId]
+    .filter(Boolean)
+    .join(":");
+}
+
+function causeMessage(error: TrackableError): string | undefined {
+  return error.cause === undefined ? undefined : errorMessage(error.cause);
+}
+
+export function buildFailureLedgerEntry(
+  runId: string,
+  context: UsageContext,
+  error: unknown,
+  durationMs: number
+): z.infer<typeof ModelResponseLedgerEntrySchema> {
+  const apiError = error as TrackableError;
+  return {
+    schemaVersion: 1,
+    eventId: randomUUID(),
+    timestamp: new Date().toISOString(),
+    runId,
+    context,
+    type: "model_response",
+    responseId: null,
+    requestedModel: config.model,
+    returnedModel: null,
+    status: "failed",
+    tokens: null,
+    rates: null,
+    costUsd: null,
+    error: errorMessage(error),
+    durationMs,
+    requestId: apiError.requestID ?? null,
+    errorType: apiError.name,
+    httpStatus: apiError.status,
+    errorCode: apiError.code ?? undefined,
+    parsed: false
+  };
 }
 
 export interface UsageSummary {
@@ -115,6 +177,31 @@ export interface UsageSummary {
 
 function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
+}
+
+export function missingParsedResultError(
+  label: string,
+  response: TrackableResponse
+): Error {
+  const outputTypes = (response.output ?? [])
+    .map((item) =>
+      item && typeof item === "object" && "type" in item
+        ? String((item as { type: unknown }).type)
+        : typeof item
+    )
+    .join("|");
+  const details = [
+    `status=${response.status ?? "unknown"}`,
+    `response_id=${response.id ?? "unknown"}`,
+    `request_id=${response._request_id ?? "unknown"}`,
+    response.incomplete_details?.reason
+      ? `incomplete_reason=${response.incomplete_details.reason}`
+      : undefined,
+    response.error?.code ? `error_code=${response.error.code}` : undefined,
+    response.error?.message ? `error_message=${response.error.message}` : undefined,
+    outputTypes ? `output_types=${outputTypes}` : undefined
+  ].filter(Boolean);
+  return new Error(`${label} returned no parsed result (${details.join(", ")}).`);
 }
 
 function isGpt56(model: string | null): boolean {
@@ -218,26 +305,40 @@ export async function trackOpenAIResponse<T>(
   context: UsageContext,
   request: () => Promise<T>
 ): Promise<T> {
+  const label = contextLabel(context);
+  const startedAt = Date.now();
+  console.log(
+    `[openai:${label}] started requested_model=${config.model} ` +
+      `timeout_ms=${config.openAITimeoutMs} web_search=${context.webSearch ?? false}`
+  );
+  const heartbeat = setInterval(() => {
+    console.log(
+      `[openai:${label}] waiting elapsed_s=${Math.round(
+        (Date.now() - startedAt) / 1_000
+      )}`
+    );
+  }, 30_000);
+  heartbeat.unref();
+
   let result: T;
   try {
     result = await request();
   } catch (error) {
-    const entry: UsageLedgerEntry = {
-      schemaVersion: 1,
-      eventId: randomUUID(),
-      timestamp: new Date().toISOString(),
-      runId,
-      context,
-      type: "model_response",
-      responseId: null,
-      requestedModel: config.model,
-      returnedModel: null,
-      status: "failed",
-      tokens: null,
-      rates: null,
-      costUsd: null,
-      error: errorMessage(error)
-    };
+    clearInterval(heartbeat);
+    const durationMs = Date.now() - startedAt;
+    const apiError = error as TrackableError;
+    const cause = causeMessage(apiError);
+    console.error(
+      `[openai:${label}] failed elapsed_ms=${durationMs} ` +
+        `error_type=${apiError.name ?? "unknown"} ` +
+        `http_status=${apiError.status ?? "unknown"} ` +
+        `error_code=${apiError.code ?? "unknown"} ` +
+        `api_type=${apiError.type ?? "unknown"} ` +
+        `request_id=${apiError.requestID ?? "unknown"} ` +
+        `message=${errorMessage(error)}` +
+        (cause ? ` cause=${cause}` : "")
+    );
+    const entry = buildFailureLedgerEntry(runId, context, error, durationMs);
     try {
       await appendEntries([entry]);
     } catch (ledgerError) {
@@ -249,12 +350,15 @@ export async function trackOpenAIResponse<T>(
     throw error;
   }
 
+  clearInterval(heartbeat);
+  const durationMs = Date.now() - startedAt;
   const response = result as TrackableResponse;
   const timestamp = new Date().toISOString();
   const returnedModel = response.model ?? null;
   const calculated = response.usage
     ? calculateModelCost(config.model, returnedModel, response.usage)
     : { tokens: null, rates: null, costUsd: null };
+  const parsed = response.output_parsed !== undefined && response.output_parsed !== null;
   const entries: UsageLedgerEntry[] = [
     {
       schemaVersion: 1,
@@ -269,7 +373,13 @@ export async function trackOpenAIResponse<T>(
       status: response.status ?? "completed",
       tokens: calculated.tokens,
       rates: calculated.rates,
-      costUsd: calculated.costUsd
+      costUsd: calculated.costUsd,
+      durationMs,
+      requestId: response._request_id ?? null,
+      error: response.error?.message,
+      errorCode: response.error?.code,
+      incompleteReason: response.incomplete_details?.reason ?? undefined,
+      parsed
     }
   ];
 
@@ -294,6 +404,18 @@ export async function trackOpenAIResponse<T>(
   }
 
   await appendEntries(entries);
+  const succeeded = parsed && (response.status ?? "completed") === "completed";
+  const verb = succeeded ? "completed" : "incomplete";
+  console.log(
+    `[openai:${label}] ${verb} elapsed_ms=${durationMs} ` +
+      `status=${response.status ?? "completed"} ` +
+      `requested_model=${config.model} ` +
+      `returned_model=${returnedModel ?? "unknown"} ` +
+      `response_id=${response.id ?? "unknown"} ` +
+      `request_id=${response._request_id ?? "unknown"} ` +
+      `input_tokens=${calculated.tokens?.input ?? "unknown"} ` +
+      `output_tokens=${calculated.tokens?.output ?? "unknown"} parsed=${parsed}`
+  );
   return result;
 }
 
