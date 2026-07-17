@@ -37,6 +37,7 @@ export async function createPlan(force = false): Promise<void> {
         instructions: PLANNER_INSTRUCTIONS,
         input: plannerInput(specification),
         max_output_tokens: config.maxOutputTokens,
+        reasoning: { effort: config.reasoningEffort },
         text: {
           format: zodTextFormat(CoursePlanSchema, "course_generation_plan")
         }

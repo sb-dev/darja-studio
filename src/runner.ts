@@ -28,6 +28,7 @@ import {
   writeText
 } from "./store.js";
 import {
+  NoParsedResultError,
   missingParsedResultError,
   readUsageLedger,
   summarizeUsage,
@@ -172,6 +173,7 @@ async function generateTask(
     instructions: TASK_INSTRUCTIONS,
     input: taskInput(plan, task, dependencies),
     max_output_tokens: config.maxOutputTokens,
+    reasoning: { effort: config.reasoningEffort },
     ...(task.webSearch
       ? { tools: [{ type: "web_search" as const }] }
       : {}),
@@ -256,6 +258,7 @@ async function generateSectionTask(
         drafts.length
       ),
       max_output_tokens: config.maxOutputTokens,
+      reasoning: { effort: config.reasoningEffort },
       ...(task.webSearch
         ? { tools: [{ type: "web_search" as const }] }
         : {}),
@@ -314,6 +317,14 @@ async function executeTask(
       runtime.error = errorMessage(error);
       await saveState(state);
       console.error(`[${task.id}] failed: ${runtime.error}`);
+
+      if (error instanceof NoParsedResultError && !error.retryable) {
+        console.error(
+          `[${task.id}] not retrying: output exceeded ${config.maxOutputTokens} tokens ` +
+            `and an identical request would truncate again. Raise MAX_OUTPUT_TOKENS or narrow the task scope.`
+        );
+        break;
+      }
 
       if (runtime.attempts < config.maxTaskAttempts) {
         await delay(1_000 * 2 ** (runtime.attempts - 1));

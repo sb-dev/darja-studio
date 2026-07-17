@@ -3,13 +3,18 @@ import { mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { createServer } from "node:http";
+import type { AddressInfo } from "node:net";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
+import { Agent, fetch as undiciFetch } from "undici";
 import { config } from "../src/config.js";
 import { validatePlanGraph } from "../src/graph.js";
 import { parsePositiveInteger } from "../src/integer.js";
+import { getOpenAI } from "../src/openai.js";
 import { sectionChunkInput } from "../src/prompts.js";
 import {
+  NoParsedResultError,
   UsageLedgerEntrySchema,
   buildFailureLedgerEntry,
   calculateModelCost,
@@ -74,6 +79,83 @@ async function projectFixture(
 
 test("OpenAI requests default to a 30-minute timeout", () => {
   assert.equal(config.openAITimeoutMs, 30 * 60 * 1_000);
+});
+
+test("the output token cap defaults to a generous runaway backstop", () => {
+  assert.equal(config.maxOutputTokens, 64_000);
+});
+
+test("reasoning effort resolves to a supported level", () => {
+  assert.ok(
+    ["minimal", "low", "medium", "high"].includes(config.reasoningEffort),
+    `unexpected reasoning effort: ${config.reasoningEffort}`
+  );
+});
+
+test("max_output_tokens truncation is a non-retryable parse failure", () => {
+  const truncated = missingParsedResultError("Task foundation", {
+    status: "incomplete",
+    incomplete_details: { reason: "max_output_tokens" }
+  } as never);
+  assert.ok(truncated instanceof NoParsedResultError);
+  assert.equal(truncated.retryable, false);
+
+  const other = missingParsedResultError("Task foundation", {
+    status: "incomplete",
+    incomplete_details: { reason: "content_filter" }
+  } as never);
+  assert.equal(other.retryable, true);
+});
+
+function agentTimeouts(dispatcher: unknown): {
+  headersTimeout?: number;
+  bodyTimeout?: number;
+} {
+  const options = Object.getOwnPropertySymbols(dispatcher as object)
+    .map((symbol) => (dispatcher as Record<symbol, unknown>)[symbol])
+    .find(
+      (value): value is { headersTimeout?: number; bodyTimeout?: number } =>
+        typeof value === "object" && value !== null && "headersTimeout" in value
+    );
+  return options ?? {};
+}
+
+// The client `timeout` only arms an AbortController; the transport enforces its own
+// headersTimeout (300s by default) and silently caps every long task without it.
+test("OpenAI transport timeouts match the configured request timeout", () => {
+  process.env.OPENAI_API_KEY ??= "test-key";
+  const dispatcher = getOpenAI().fetchOptions?.dispatcher;
+
+  assert.ok(dispatcher, "client must pin a dispatcher rather than inherit the default");
+  const timeouts = agentTimeouts(dispatcher);
+  assert.equal(timeouts.headersTimeout, config.openAITimeoutMs);
+  assert.equal(timeouts.bodyTimeout, config.openAITimeoutMs);
+});
+
+// Node's bundled fetch rejects a dispatcher built by a mismatched undici version,
+// failing instantly with UND_ERR_INVALID_ARG instead of honouring the timeout.
+test("the configured fetch honours its dispatcher's headersTimeout", async () => {
+  const server = createServer(() => {
+    // Accept the request but never send headers, like a long reasoning run.
+  });
+  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
+  const { port } = server.address() as AddressInfo;
+
+  const started = Date.now();
+  try {
+    await undiciFetch(`http://127.0.0.1:${port}/`, {
+      dispatcher: new Agent({ headersTimeout: 1_000, bodyTimeout: 1_000 })
+    });
+    assert.fail("request should have timed out");
+  } catch (error) {
+    assert.equal(
+      ((error as { cause?: { code?: string } }).cause ?? {}).code,
+      "UND_ERR_HEADERS_TIMEOUT"
+    );
+    assert.ok(Date.now() - started < 30_000, "must use the dispatcher's timeout");
+  } finally {
+    server.close();
+  }
 });
 
 test("positive integer parsing rejects partially numeric values", () => {
