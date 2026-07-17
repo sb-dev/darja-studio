@@ -1,7 +1,7 @@
 {
   "runId": "f5a39de2-1361-4bb1-9812-7d46ef0e28ca",
   "createdAt": "2026-07-15T12:04:30.353Z",
-  "updatedAt": "2026-07-17T21:39:49.050Z",
+  "updatedAt": "2026-07-17T22:43:33.600Z",
   "tasks": {
     "foundation": {
       "status": "done",
@@ -16,24 +16,34 @@
       "completedAt": "2026-07-17T21:39:49.050Z"
     },
     "ch01": {
-      "status": "pending",
-      "attempts": 0
+      "status": "done",
+      "attempts": 1,
+      "startedAt": "2026-07-17T21:46:09.254Z",
+      "completedAt": "2026-07-17T21:55:33.103Z"
     },
     "ch02": {
-      "status": "pending",
-      "attempts": 0
+      "status": "done",
+      "attempts": 1,
+      "startedAt": "2026-07-17T21:55:33.113Z",
+      "completedAt": "2026-07-17T22:06:00.242Z"
     },
     "ch03": {
-      "status": "pending",
-      "attempts": 0
+      "status": "done",
+      "attempts": 1,
+      "startedAt": "2026-07-17T22:06:00.250Z",
+      "completedAt": "2026-07-17T22:16:23.876Z"
     },
     "ch04": {
-      "status": "pending",
-      "attempts": 0
+      "status": "done",
+      "attempts": 1,
+      "startedAt": "2026-07-17T22:16:23.887Z",
+      "completedAt": "2026-07-17T22:26:14.777Z"
     },
     "sec01": {
-      "status": "pending",
-      "attempts": 0
+      "status": "done",
+      "attempts": 1,
+      "startedAt": "2026-07-17T22:26:14.788Z",
+      "completedAt": "2026-07-17T22:43:33.600Z"
     },
     "ch05": {
       "status": "pending",
