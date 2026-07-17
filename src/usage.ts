@@ -132,6 +132,37 @@ function causeMessage(error: TrackableError): string | undefined {
   return error.cause === undefined ? undefined : errorMessage(error.cause);
 }
 
+export function buildFailureLedgerEntry(
+  runId: string,
+  context: UsageContext,
+  error: unknown,
+  durationMs: number
+): z.infer<typeof ModelResponseLedgerEntrySchema> {
+  const apiError = error as TrackableError;
+  return {
+    schemaVersion: 1,
+    eventId: randomUUID(),
+    timestamp: new Date().toISOString(),
+    runId,
+    context,
+    type: "model_response",
+    responseId: null,
+    requestedModel: config.model,
+    returnedModel: null,
+    status: "failed",
+    tokens: null,
+    rates: null,
+    costUsd: null,
+    error: errorMessage(error),
+    durationMs,
+    requestId: apiError.requestID ?? null,
+    errorType: apiError.name,
+    httpStatus: apiError.status,
+    errorCode: apiError.code ?? undefined,
+    parsed: false
+  };
+}
+
 export interface UsageSummary {
   responses: number;
   webSearches: number;
@@ -307,28 +338,7 @@ export async function trackOpenAIResponse<T>(
         `message=${errorMessage(error)}` +
         (cause ? ` cause=${cause}` : "")
     );
-    const entry: UsageLedgerEntry = {
-      schemaVersion: 1,
-      eventId: randomUUID(),
-      timestamp: new Date().toISOString(),
-      runId,
-      context,
-      type: "model_response",
-      responseId: null,
-      requestedModel: config.model,
-      returnedModel: null,
-      status: "failed",
-      tokens: null,
-      rates: null,
-      costUsd: null,
-      error: errorMessage(error),
-      durationMs,
-      requestId: apiError.requestID ?? null,
-      errorType: apiError.name,
-      httpStatus: apiError.status,
-      errorCode: apiError.code ?? undefined,
-      parsed: false
-    };
+    const entry = buildFailureLedgerEntry(runId, context, error, durationMs);
     try {
       await appendEntries([entry]);
     } catch (ledgerError) {
@@ -394,8 +404,10 @@ export async function trackOpenAIResponse<T>(
   }
 
   await appendEntries(entries);
+  const succeeded = parsed && (response.status ?? "completed") === "completed";
+  const verb = succeeded ? "completed" : "incomplete";
   console.log(
-    `[openai:${label}] completed elapsed_ms=${durationMs} ` +
+    `[openai:${label}] ${verb} elapsed_ms=${durationMs} ` +
       `status=${response.status ?? "completed"} ` +
       `requested_model=${config.model} ` +
       `returned_model=${returnedModel ?? "unknown"} ` +

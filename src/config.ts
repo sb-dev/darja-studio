@@ -20,5 +20,5 @@ export const config = {
   model: process.env.OPENAI_MODEL ?? "gpt-5.6",
   openAITimeoutMs: positiveInteger("OPENAI_TIMEOUT_MS", 30 * 60 * 1_000),
   maxOutputTokens: positiveInteger("MAX_OUTPUT_TOKENS", 18_000),
-  maxTaskAttempts: positiveInteger("MAX_TASK_ATTEMPTS", 3)
+  maxTaskAttempts: positiveInteger("MAX_TASK_ATTEMPTS", 3),
 } as const;

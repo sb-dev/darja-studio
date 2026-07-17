@@ -11,6 +11,7 @@ import { parsePositiveInteger } from "../src/integer.js";
 import { sectionChunkInput } from "../src/prompts.js";
 import {
   UsageLedgerEntrySchema,
+  buildFailureLedgerEntry,
   calculateModelCost,
   missingParsedResultError,
   summarizeUsage
@@ -390,6 +391,33 @@ test("missing parsed results include response diagnostics", () => {
   assert.match(error.message, /request_id=req_1/);
   assert.match(error.message, /incomplete_reason=max_output_tokens/);
   assert.match(error.message, /output_types=reasoning/);
+});
+
+test("failed requests map API error metadata onto the ledger entry", () => {
+  const apiError = Object.assign(new Error("Request timed out."), {
+    name: "APIConnectionTimeoutError",
+    status: 504,
+    code: "timeout",
+    requestID: "req_failed_1"
+  });
+  const entry = buildFailureLedgerEntry(
+    "00000000-0000-4000-8000-000000000001",
+    { operation: "task", taskId: "foundation", attempt: 1 },
+    apiError,
+    12_345
+  );
+
+  assert.equal(entry.type, "model_response");
+  assert.equal(entry.status, "failed");
+  assert.equal(entry.error, "Request timed out.");
+  assert.equal(entry.durationMs, 12_345);
+  assert.equal(entry.parsed, false);
+  assert.equal(entry.requestId, "req_failed_1");
+  assert.equal(entry.errorType, "APIConnectionTimeoutError");
+  assert.equal(entry.httpStatus, 504);
+  assert.equal(entry.errorCode, "timeout");
+  // Entry validates against the schema so failure rows persist cleanly.
+  assert.doesNotThrow(() => UsageLedgerEntrySchema.parse(entry));
 });
 
 test("legacy ledger entries remain valid without diagnostic fields", () => {
